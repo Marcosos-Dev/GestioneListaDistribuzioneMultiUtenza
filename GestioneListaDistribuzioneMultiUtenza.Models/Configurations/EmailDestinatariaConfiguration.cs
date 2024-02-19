@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Configurations
 {
-    public class EmailDestinatariaConfiguration : IEntityTypeConfiguration<EmailDestinataria>
+    public class EmailDestinatariaConfiguration : IEntityTypeConfiguration<EmailDestinatario>
     {
-        public void Configure(EntityTypeBuilder<EmailDestinataria> builder)
+        public void Configure(EntityTypeBuilder<EmailDestinatario> builder)
         {
             builder.ToTable("Dipendenti");
             builder.HasKey(k => k.IdDestinatario);

@@ -9,10 +9,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Entities
     public class ListaDistribuzione
     {
         public int IdLista {  get; set; }
-        public string NomeLista { get; set; }
         public int IdProprietario { get; set; }
+        public string nomeLista { get; set; }
 
-        public ICollection<EmailDestinataria> EmailDestinatarie { get; set; } = null!;
+        public ICollection<ListaDist_Destinatario> EmailDestinatarie { get; set; } = null!;
         public Utente UtenteProprietario { get; set; }
 
 

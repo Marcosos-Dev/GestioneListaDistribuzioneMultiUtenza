@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 {
-    internal class EmailDestinatariaRepository
+    internal class EmailDestinatarioRepository
     {
     }
 }
