@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Configurations
 {
-    public class ListaDistribuzioneConfiguration //: IEntityTypeConfiguration<Dipendente>
+    public class ListaDistribuzioneConfiguration : IEntityTypeConfiguration<ListaDistribuzione>
     {
-        /*public void Configure(EntityTypeBuilder<Dipendente> builder)
+        public void Configure(EntityTypeBuilder<ListaDistribuzione> builder)
         {
-            builder.ToTable("Dipendenti");
-            builder.HasKey(k => k.IdDipendente);
-            builder.HasOne(x => x.AziendaDoveLavora)
-                .WithMany(x => x.Dipendenti)
-                .HasForeignKey(x => x.IdAzienda);
-        }*/
+            builder.ToTable("ListeDistribuzione");
+            builder.HasKey(k => k.IdLista);
+            builder.HasOne(x => x.IdLista)
+                .WithMany(x => x.)
+                .HasForeignKey(x => x);
+        }
     }
 }

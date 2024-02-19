@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Configurations
 {
-    public class UtenteConfiguration //: IEntityTypeConfiguration<Utente>
+    public class UtenteConfiguration : IEntityTypeConfiguration<Utente>
     {
-        /*public void Configure(EntityTypeBuilder<Utente> builder)
+        public void Configure(EntityTypeBuilder<Utente> builder)
         {
             builder.ToTable("Utenti");
             builder.HasKey(p => p.IdUtente);
-            builder.Property(p => p.RagioneSociale)
-                .HasMaxLength(100);
-        }*/
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Context
 
         }
 
-        //public DbSet<Utenti> Utente { get; set; }
-        //public DbSet<ListaDistribuziome> ListaDistribuzione { get; set; }
-        //public DbSet<EmailDestinataria> EmailDest{ get; set; }
+        public DbSet<Utente> Utente { get; set; }
+        public DbSet<ListaDistribuzione> ListaDistribuzione { get; set; }
+        public DbSet<EmailDestinataria> EmailDest{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

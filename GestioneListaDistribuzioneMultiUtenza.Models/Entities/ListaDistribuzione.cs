@@ -11,7 +11,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Entities
         public int IdLista {  get; set; }
         public string NomeLista { get; set; }
 
-        public ICollection<EmailDestinataria> EmailDestinatarie { get; set; } = null!;
+        //public ICollection<EmailDestinataria> EmailDestinatarie { get; set; } = null!;
         public Utente UtenteProprietario { get; set; }
 
 
