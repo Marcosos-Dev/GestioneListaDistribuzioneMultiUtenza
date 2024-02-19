@@ -15,9 +15,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Configurations
         {
             builder.ToTable("ListeDistribuzione");
             builder.HasKey(k => k.IdLista);
-            builder.HasOne(x => x.IdLista)
-                .WithMany(x => x.)
-                .HasForeignKey(x => x);
+            builder.HasOne(x => x.UtenteProprietario)
+                .WithMany(x => x.ListeDistribuzione)
+                .HasForeignKey(x => x.IdProprietario);
         }
     }
 }
