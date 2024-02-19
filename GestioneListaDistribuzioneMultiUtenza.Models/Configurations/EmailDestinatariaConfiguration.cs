@@ -13,11 +13,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Configurations
     {
         public void Configure(EntityTypeBuilder<EmailDestinatario> builder)
         {
-            builder.ToTable("Dipendenti");
-            builder.HasKey(k => k.IdDestinatario);
-            builder.HasOne(x => x.ListaDiAppartenenza)
-                .WithMany(x => x.EmailDestinatarie)
-                .HasForeignKey(x => x.ListaDistribuzioneId);
+            builder.ToTable("EmailDestinatari");
+            builder.HasKey(k => k.IdEmailDestinario);
         }
     }
 }
