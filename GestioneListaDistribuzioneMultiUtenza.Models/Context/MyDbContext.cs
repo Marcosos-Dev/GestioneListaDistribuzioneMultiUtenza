@@ -30,7 +30,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Context
             {
                 optionsBuilder
                //.UseLazyLoadingProxies()
-               .UseSqlServer("data source=localhost;Initial catalog=paradigmi;User Id=paradigmi;Password=paradigmi;TrustServerCertificate=True");
+               .UseSqlServer("data source=localhost;Initial catalog=DistribuzioneMultiUtenza;User Id=paradigmi;Password=paradigmi;TrustServerCertificate=True;Trusted_Connection=true");
 
             }
         }
