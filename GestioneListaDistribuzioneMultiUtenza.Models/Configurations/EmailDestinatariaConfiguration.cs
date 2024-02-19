@@ -14,7 +14,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Configurations
         public void Configure(EntityTypeBuilder<EmailDestinatario> builder)
         {
             builder.ToTable("EmailDestinatari");
-            builder.HasKey(k => k.IdEmailDestinario);
+            builder.HasKey(k => k.IdEmailDestinatario);
         }
     }
 }

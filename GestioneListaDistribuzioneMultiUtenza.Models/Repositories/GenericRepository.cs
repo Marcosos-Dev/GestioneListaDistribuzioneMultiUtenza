@@ -19,7 +19,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
         public void Aggiungi(T entity)
         {
             _ctx.Set<T>().Add(entity);
-            this.Save();
         }
 
         public T Ottieni(object id)
@@ -33,8 +32,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
             if(entity != null)
             {
                 _ctx.Set<T>().Remove(entity);
-                _ctx.SaveChanges();
-            }
+            }    
         }
 
         public void Save()

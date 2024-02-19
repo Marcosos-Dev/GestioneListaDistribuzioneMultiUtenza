@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 MyDbContext ctx = new MyDbContext();
 
-var utenteRepo = new UtenteRepository(ctx);
+/*var utenteRepo = new UtenteRepository(ctx);
 var utente1 = new Utente();
 var utente2 = new Utente();
 var utente3 = new Utente();
@@ -28,7 +28,6 @@ utente3.password = "abcdefg";
 utenteRepo.Aggiungi(utente1);
 utenteRepo.Aggiungi(utente2);
 utenteRepo.Aggiungi(utente3);
-utenteRepo.Save();
 
 var listaRepo = new ListaDistribuzioneRepository(ctx);
 var lista1 = new ListaDistribuzione();
@@ -42,7 +41,6 @@ lista2.IdProprietario = 2;
 
 listaRepo.Aggiungi(lista1);
 listaRepo.Aggiungi(lista2);
-listaRepo.Save();
 
 var emailRepo = new EmailDestinatarioRepository(ctx);
 var email1 = new EmailDestinatario();
@@ -59,7 +57,6 @@ emailRepo.Aggiungi(email1);
 emailRepo.Aggiungi(email2);
 emailRepo.Aggiungi(email3);
 emailRepo.Aggiungi(email4);
-emailRepo.Save();
 
 var lista_dest_Repo = new ListaDestinatariRepository(ctx);
 var info1 = new ListaDist_Destinatario();
@@ -73,14 +70,13 @@ info1.IdEmailDestinatario = 1;
 info2.IdLista = 1;
 info2.IdEmailDestinatario = 3;
 
-info3.IdLista = 3;
+info3.IdLista = 2;
 info3.IdEmailDestinatario = 3;
 
-info4.IdLista = 3;
+info4.IdLista = 2;
 info4.IdEmailDestinatario = 4;
 
 lista_dest_Repo.Aggiungi(info1);
 lista_dest_Repo.Aggiungi(info2);
 lista_dest_Repo.Aggiungi(info3);
-lista_dest_Repo.Aggiungi(info4);
-lista_dest_Repo.Save();
+lista_dest_Repo.Aggiungi(info4);*/
