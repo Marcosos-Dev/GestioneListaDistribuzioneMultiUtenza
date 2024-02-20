@@ -20,10 +20,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Context
 
         }
 
-        public DbSet<Utente> Utente { get; set; }
-        public DbSet<ListaDistribuzione> ListaDistribuzione { get; set; }
-        public DbSet<ListaDistribuzione_Email> UnioneLista_Destinatari { get; set; }
-        public DbSet<EmailDestinatario> EmailDest{ get; set; }
+        public DbSet<Utente> Utenti { get; set; }
+        public DbSet<ListaDistribuzione> ListeDistribuzione { get; set; }
+        public DbSet<ListaDistribuzione_Email> UnioneListe_Destinatari { get; set; }
+        public DbSet<EmailDestinatario> EmailDestinatarie{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
