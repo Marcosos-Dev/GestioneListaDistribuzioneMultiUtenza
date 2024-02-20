@@ -20,6 +20,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
         {
             _ctx.Set<T>().Add(entity);
         }
+        public async Task AggiungiAsync(T entity)
+        {
+            await _ctx.Set<T>().AddAsync(entity);
+        }
 
         public T Ottieni(object id)
         {
@@ -38,6 +42,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
         public void Save()
         {
             _ctx.SaveChanges();
+        }
+        public async Task SaveAsync()
+        {
+            await _ctx.SaveChangesAsync();
         }
 
     }

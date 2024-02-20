@@ -4,12 +4,16 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Models\Dtos\" />
     <Folder Include="Models\Responses\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GestioneListaDistribuzioneMultiUtenza.Models\GestioneListaDistribuzioneMultiUtenza.Models.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,9 @@
-﻿namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services
+﻿using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+
+namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services
 {
-    public class IUtenteService
+    public interface IUtenteService
     {
+        Task AddUtenteAsync(Utente utente);
     }
 }

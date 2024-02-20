@@ -4,8 +4,15 @@ using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 using GestioneListaDistribuzioneMultiUtenza.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-MyDbContext ctx = new MyDbContext();
-
+/*MyDbContext ctx = new MyDbContext();
+var utenteRepo = new UtenteRepository(ctx);
+var utente1 = new Utente();
+utente1.Nome = "Antonio";
+utente1.Cognome = "Binocolo";
+utente1.Email = "antonio.binocolo@gmail.com";
+utente1.Password = "123456";
+await utenteRepo.AggiungiAsync(utente1);
+await utenteRepo.SaveAsync();*/
 /*var utenteRepo = new UtenteRepository(ctx);
 var utente1 = new Utente();
 var utente2 = new Utente();
