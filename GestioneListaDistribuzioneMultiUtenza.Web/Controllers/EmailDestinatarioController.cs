@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 {
-    //[ApiController]
+    [ApiController]
     [Route("api/v1/[controller]")]
     public class EmailDestinatarioController : ControllerBase
     {

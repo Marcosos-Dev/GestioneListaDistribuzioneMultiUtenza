@@ -1,4 +1,10 @@
 
+using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
+using GestioneListaDistribuzioneMultiUtenza.Application.Services;
+using GestioneListaDistribuzioneMultiUtenza.Models.Context;
+using GestioneListaDistribuzioneMultiUtenza.Models.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 namespace GestioneListaDistribuzioneMultiUtenza.Web
 {
     public class Program
@@ -12,13 +18,16 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            // Add services to the container.
             builder.Services.AddDbContext<MyDbContext>(conf =>
             {
-                conf.UseSqlServer(configuration.GetConnectionString("MyDbContext"));
+                conf.UseSqlServer("data source=localhost;Initial catalog=DistribuzioneMultiUtenza;User Id=paradigmi;Password=paradigmi;TrustServerCertificate=True;Trusted_Connection=true");
             });
+
+            // Add services to the container.
             builder.Services.AddScoped<IUtenteService,UtenteService>();
             builder.Services.AddScoped<UtenteRepository>();
+            builder.Services.AddScoped<IEmailDestinatarioService, EmailDestinatarioService>();
+            builder.Services.AddScoped<EmailDestinatarioRepository>();
 
             builder.Services.AddControllers();
 
@@ -26,13 +35,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<MyDbContext>(conf =>
-            {
-                conf.UseSqlServer("data source=localhost;Initial catalog=DistribuzioneMultiUtenza;User Id=paradigmi;Password=paradigmi;TrustServerCertificate=True;Trusted_Connection=true");
-            });
-
-            builder.Services.AddScoped<IEmailDestinatarioService, EmailDestinatarioService>();
-            builder.Services.AddScoped<EmailDestinatarioRepository>();
+            
+            
 
             var app = builder.Build();
 
