@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Models\Dtos\" />
     <Folder Include="Models\Responses\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
