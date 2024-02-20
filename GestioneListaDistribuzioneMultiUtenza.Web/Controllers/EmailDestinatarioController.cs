@@ -29,7 +29,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         public IActionResult deleteDestinatarioFromList(CreateEmailDestinatarioRequest request)
         {
             var email = request.ToEntity();
-            _emailDestinatarioService.deleteDestinatarioFromList(email.Email);
+            _emailDestinatarioService.deleteDestinatarioFromList(email);
             return Ok();
         }
 

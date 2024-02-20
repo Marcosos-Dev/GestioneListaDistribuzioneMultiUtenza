@@ -6,7 +6,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
     {
         //todo vedere async per la add
         //void addDestinatarioToListAsync(EmailDestinatario email, int idlist);
-        void deleteDestinatarioFromList(string email);
+        void deleteDestinatarioFromList(EmailDestinatario email);
         List<ListaDistribuzione> GetListaDistribuzionesOfEmail(string email);
     }
 }

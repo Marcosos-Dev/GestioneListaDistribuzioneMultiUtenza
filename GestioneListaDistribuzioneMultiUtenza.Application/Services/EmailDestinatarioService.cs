@@ -21,9 +21,12 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             _emailRepository.Save();
         }*/
 
-        public void deleteDestinatarioFromList(string email)
+        public void deleteDestinatarioFromList(EmailDestinatario email)
         {
-            _emailRepository.Elimina(email);
+            //find the id
+            email = _emailRepository.getEmailByString(email.Email);
+            //delete by id
+            _emailRepository.Elimina(email.IdEmailDestinatario);
             _emailRepository.Save();
         }
 

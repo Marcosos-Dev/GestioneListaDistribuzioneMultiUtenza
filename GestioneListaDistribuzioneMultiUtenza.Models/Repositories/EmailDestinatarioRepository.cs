@@ -16,6 +16,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         }
 
+        public EmailDestinatario getEmailByString(string email)
+        {
+            return _ctx.EmailDestinatarie.
+                Where(x => x.Email.Equals(email))
+                .First();
+        }
+
         public void addEmailWithList(EmailDestinatario e, int id)
         {
             _ctx.EmailDestinatarie.Add(e);
