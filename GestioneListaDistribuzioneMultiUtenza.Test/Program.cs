@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 MyDbContext ctx = new MyDbContext();
 
+//var emailRepo = new EmailDestinatarioRepository(ctx);
+//var res = emailRepo.getListaByEmail("third@gmail.com");
+
 /*var utenteRepo = new UtenteRepository(ctx);
 var utente1 = new Utente();
 var utente2 = new Utente();
@@ -80,3 +83,4 @@ lista_dest_Repo.Aggiungi(info1);
 lista_dest_Repo.Aggiungi(info2);
 lista_dest_Repo.Aggiungi(info3);
 lista_dest_Repo.Aggiungi(info4);*/
+Console.ReadLine();

@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Configurations
 {
-    public class ListeDestinatariConfiguration : IEntityTypeConfiguration<ListaDist_Destinatario>
+    public class ListeDestinatariConfiguration : IEntityTypeConfiguration<ListaDistribuzione_Email>
     {
-        public void Configure(EntityTypeBuilder<ListaDist_Destinatario> builder)
+        public void Configure(EntityTypeBuilder<ListaDistribuzione_Email> builder)
         {
             builder.ToTable("Liste_Destinatari");
             builder.HasKey(k => k.IdListaDestinatari);
 
-            builder.HasOne(x => x.ListaDist)
+            builder.HasOne(x => x.ListaAssociata)
                 .WithMany(x => x.EmailDestinatarie)
                 .HasForeignKey(x => x.IdLista);
 
             builder.HasOne(x => x.Destinatario)
-                .WithMany(x => x.ListaDiAppartenenze)
+                .WithMany(x => x.ListeDiAppartenenze)
                 .HasForeignKey(x => x.IdEmailDestinatario);
         }
     }

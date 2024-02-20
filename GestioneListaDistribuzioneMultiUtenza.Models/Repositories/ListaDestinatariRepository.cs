@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 {
-    public class ListaDestinatariRepository : GenericRepository<ListaDist_Destinatario>
+    public class ListaDestinatariRepository : GenericRepository<ListaDistribuzione_Email>
     {
         public ListaDestinatariRepository(MyDbContext ctx) : base(ctx)
         {

@@ -22,6 +22,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Context
 
         public DbSet<Utente> Utente { get; set; }
         public DbSet<ListaDistribuzione> ListaDistribuzione { get; set; }
+        public DbSet<ListaDistribuzione_Email> ListaDestinatari { get; set; }
         public DbSet<EmailDestinatario> EmailDest{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -29,7 +30,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-               //.UseLazyLoadingProxies()
                .UseSqlServer("data source=localhost;Initial catalog=DistribuzioneMultiUtenza;User Id=paradigmi;Password=paradigmi;TrustServerCertificate=True;Trusted_Connection=true");
 
             }
@@ -37,8 +37,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration<Azienda>(new AziendaConfiguration());
-
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
             base.OnModelCreating(modelBuilder);
         }

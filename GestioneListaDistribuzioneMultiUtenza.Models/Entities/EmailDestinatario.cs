@@ -9,8 +9,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Entities
     public class EmailDestinatario
     {
         public int IdEmailDestinatario { get; set; }
-        public string email {  get; set; }
+        public string Email {  get; set; }
 
-        public ICollection<ListaDist_Destinatario> ListaDiAppartenenze { get; set; } = null!;
+        public ICollection<ListaDistribuzione_Email> ListeDiAppartenenze { get; set; } = null!;
     }
 }
