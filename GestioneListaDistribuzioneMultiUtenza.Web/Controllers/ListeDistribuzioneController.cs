@@ -2,11 +2,7 @@
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 {
-    public class ListeDistribuzioneController : Controller
+    public class ListeDistribuzioneController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }

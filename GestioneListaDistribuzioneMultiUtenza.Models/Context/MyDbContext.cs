@@ -27,12 +27,12 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            /*if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
                .UseSqlServer("data source=localhost;Initial catalog=DistribuzioneMultiUtenza;User Id=paradigmi;Password=paradigmi;TrustServerCertificate=True;Trusted_Connection=true");
 
-            }
+            }*/
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

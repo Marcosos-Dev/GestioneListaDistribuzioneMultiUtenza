@@ -2,11 +2,7 @@
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 {
-    public class UtentiController : Controller
+    public class UtentiController : ControllerBase
     {
-        public async Task<IActionResult> CreateUtente(CreateUtenteRequest request)
-        {
-            return View();
-        }
     }
 }
