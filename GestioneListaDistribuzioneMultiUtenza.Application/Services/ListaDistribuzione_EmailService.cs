@@ -15,19 +15,20 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             _listaDistribuzioneEmailRepository = listaDistribuzioneEmailRepository;
         }
 
-        public void AddDestinatarioToList(int listID, int emailId)
+        public async Task AddDestinatarioToListAsync(ListaDistribuzione_Email item)
         {
-            _listaDistribuzioneEmailRepository.aggiungiDestinatario(listID, emailId);
+            await _listaDistribuzioneEmailRepository.AggiungiAsync(item);
+            await _listaDistribuzioneEmailRepository.SaveAsync();
         }
 
-        public void DeleteDestinatarioFromList(int listID, int emailId)
+        public void DeleteDestinatarioFromList(ListaDistribuzione_Email item)
         {
-            _listaDistribuzioneEmailRepository.eliminaDestinatario(listID, emailId);
+            _listaDistribuzioneEmailRepository.EliminaDestinatario(item.IdLista,item.IdEmailDestinatario);
         }
 
-        public List<ListaDistribuzione> GetListaDistribuzionesOfEmail(int emailId)
+        public List<ListaDistribuzione> GetListaDistribuzioneFromEmail(int emailId)
         {
-            return _listaDistribuzioneEmailRepository.getListaByEmail(emailId);
+            return _listaDistribuzioneEmailRepository.GetListaByEmail(emailId);
         }
 
         public void SendEmailToList(int listID)

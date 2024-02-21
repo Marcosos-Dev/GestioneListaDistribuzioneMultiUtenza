@@ -16,9 +16,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 
         [HttpPost]
         [Route("addDestinatario")]
-        public IActionResult AggiungeDestinatario(CreateListaDistribuzione_EmailRequest request)
+        public async Task<IActionResult> AggiungiDestinatarioAsync(CreateListaDistribuzione_EmailRequest request)
         {
-            _listaDistribuzione_EmailService.AddDestinatarioToList(request.listId, request.emailId);
+            var item = request.ToEntity();
+            await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(item);
             return Ok();
         }
 
@@ -26,15 +27,16 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("deleteDestinatario")]
         public IActionResult DeleteDestinatarioFromList(CreateListaDistribuzione_EmailRequest request)
         {
-            _listaDistribuzione_EmailService.DeleteDestinatarioFromList(request.listId, request.emailId);
+            var item = request.ToEntity();
+            _listaDistribuzione_EmailService.DeleteDestinatarioFromList(item);
             return Ok();
         }
 
         [HttpGet]
         [Route("getLists")]
-        public IActionResult GetListaDistribuzionesOfEmail(CreateListaDistribuzione_EmailRequest request)
+        public IActionResult GetListaDistribuzioneOfEmail(CreateListaDistribuzione_EmailRequest request)
         {
-            _listaDistribuzione_EmailService.GetListaDistribuzionesOfEmail(request.emailId);
+            _listaDistribuzione_EmailService.GetListaDistribuzioneFromEmail(request.emailId);
             return Ok();
         }
 

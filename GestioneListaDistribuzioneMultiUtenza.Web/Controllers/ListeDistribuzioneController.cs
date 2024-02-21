@@ -17,7 +17,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 
         [HttpPost]
         [Route("addNewList")]
-        public async Task<IActionResult> AggiungiDestinatario(CreateListaDistribuzioneRequest request)
+        public async Task<IActionResult> AggiungiLista(CreateListaDistribuzioneRequest request)
         {
             var lista = request.ToEntity();
             await listaDistribuzioneService.AggiungiListaAsync(lista);

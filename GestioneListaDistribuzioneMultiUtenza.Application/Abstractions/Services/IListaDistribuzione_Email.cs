@@ -4,9 +4,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
 {
     public interface IListaDistribuzione_Email
     {
-        void AddDestinatarioToList(int listID, int emailId);
-        void DeleteDestinatarioFromList(int listID, int emailId);
-        List<ListaDistribuzione> GetListaDistribuzionesOfEmail(int emailId);
+        Task AddDestinatarioToListAsync(ListaDistribuzione_Email item);
+        void DeleteDestinatarioFromList(ListaDistribuzione_Email item);
+        List<ListaDistribuzione> GetListaDistribuzioneFromEmail(int emailId);
         void SendEmailToList(int listID);
     }
 }
