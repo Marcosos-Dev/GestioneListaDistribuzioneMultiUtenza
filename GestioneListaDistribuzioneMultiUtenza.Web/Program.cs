@@ -26,8 +26,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
             // Add services to the container.
             builder.Services.AddScoped<IUtenteService,UtenteService>();
             builder.Services.AddScoped<UtenteRepository>();
-            builder.Services.AddScoped<IListaDistribuzione_Email, ListaDistribuzione_Email>();
+            builder.Services.AddScoped<IListaDistribuzione_Email, ListaDistribuzione_EmailService>();
             builder.Services.AddScoped<ListaDestinatariRepository>();
+            builder.Services.AddScoped<IListaDistribuzione, ListaDistribuzioneService>();
+            builder.Services.AddScoped<ListaDistribuzioneRepository>();
 
             builder.Services.AddControllers();
 
