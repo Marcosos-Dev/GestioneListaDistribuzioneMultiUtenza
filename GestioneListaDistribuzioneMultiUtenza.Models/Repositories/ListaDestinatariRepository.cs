@@ -15,7 +15,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         }
 
-        public void EliminaDestinatario(int listId, int emailId)
+        public void EliminaDestinatarioFromList(int listId, int emailId)
         {
             var record = _ctx.UnioneListe_Destinatari.
                 Where(x => x.IdLista == listId && x.IdEmailDestinatario == emailId)

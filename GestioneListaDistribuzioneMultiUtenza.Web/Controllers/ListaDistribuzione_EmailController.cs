@@ -34,7 +34,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 
         [HttpGet]
         [Route("getLists")]
-        public IActionResult GetListaDistribuzioneOfEmail(CreateListaDistribuzione_EmailRequest request)
+        public IActionResult GetListaDistribuzioneFromEmail(CreateListaDistribuzione_EmailRequest request)
         {
             _listaDistribuzione_EmailService.GetListaDistribuzioneFromEmail(request.emailId);
             return Ok();

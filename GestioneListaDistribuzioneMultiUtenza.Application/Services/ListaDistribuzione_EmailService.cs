@@ -23,7 +23,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 
         public void DeleteDestinatarioFromList(ListaDistribuzione_Email item)
         {
-            _listaDistribuzioneEmailRepository.EliminaDestinatario(item.IdLista,item.IdEmailDestinatario);
+            _listaDistribuzioneEmailRepository.EliminaDestinatarioFromList(item.IdLista,item.IdEmailDestinatario);
         }
 
         public List<ListaDistribuzione> GetListaDistribuzioneFromEmail(int emailId)
