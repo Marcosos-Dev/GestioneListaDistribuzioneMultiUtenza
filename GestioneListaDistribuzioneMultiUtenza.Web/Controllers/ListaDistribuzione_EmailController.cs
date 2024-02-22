@@ -1,5 +1,7 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
+using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
+using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
@@ -35,8 +37,15 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("getLists")]
         public IActionResult GetListaDistribuzioneFromEmail(GetListaFromEmailRequest request)
         {
-            _listaDistribuzione_EmailService.GetListaDistribuzioneFromEmail(request);
-            return Ok();
+            var listeDiDistribuzione = _listaDistribuzione_EmailService.GetListaDistribuzioneFromEmail(request);
+
+            var response = new GetListeFromEmailResponse();
+            response.Liste = listeDiDistribuzione.Select(s =>
+            new Application.Models.Dtos.ListaDistribuzioneDto(s)).ToList();
+
+            return Ok(ResponseFactory
+              .WithSuccess(response)
+              );
         }
 
         [HttpPost]

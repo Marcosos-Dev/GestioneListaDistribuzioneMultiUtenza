@@ -1,5 +1,7 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
+using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
+using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
 using GestioneListaDistribuzioneMultiUtenza.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -33,7 +35,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             lista.IdProprietario = IdUtente;
             //lista.UtenteProprietario=await _utenteService.GetUtenteByIdAsync(IdUtente);
             await _listaDistribuzioneService.AggiungiListaAsync(lista);
-            return Ok(lista);
+
+            var response = new CreateListaDistribuzioneResponse();
+            response.lista = new Application.Models.Dtos.ListaDistribuzioneDto(lista);
+
+            return Ok(ResponseFactory
+              .WithSuccess(response)
+              );
         }
 
     }

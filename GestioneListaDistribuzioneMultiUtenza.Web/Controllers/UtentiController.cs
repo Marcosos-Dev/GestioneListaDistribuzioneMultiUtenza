@@ -1,5 +1,7 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
+using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
+using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
@@ -18,11 +20,15 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("new")]
         public async Task<IActionResult> CreateUtenteAsync(CreateUtenteRequest request)
         {
-            //jwt
             var utente = request.toEntity();
             await _utenteService.AddUtenteAsync(utente);
             //response
-            return Ok();
+            var response = new CreateUtenteResponse();
+            response.Utente = new Application.Models.Dtos.UtenteDto(utente);
+
+            return Ok(ResponseFactory
+              .WithSuccess(response)
+              );
         }
     }
 }
