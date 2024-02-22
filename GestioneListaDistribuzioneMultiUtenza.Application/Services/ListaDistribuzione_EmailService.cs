@@ -9,6 +9,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
     {
         private readonly ListaDestinatariRepository _listaDistribuzioneEmailRepository;
         private readonly IEmailService _emailService;
+        //private readonly IListaDistribuzioneService _listaDistribuzioneService;
 
         public ListaDistribuzione_EmailService(
             ListaDestinatariRepository listaDistribuzioneEmailRepository,
