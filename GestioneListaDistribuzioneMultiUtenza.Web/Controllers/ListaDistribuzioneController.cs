@@ -13,9 +13,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ListaDistribuzioneController : ControllerBase
     {
-        private readonly IListaDistribuzione _listaDistribuzioneService;
+        private readonly IListaDistribuzioneService _listaDistribuzioneService;
         private readonly IUtenteService _utenteService;
-        public ListaDistribuzioneController(IListaDistribuzione listaDistribuzioneService, IUtenteService utenteService)
+        public ListaDistribuzioneController(IListaDistribuzioneService listaDistribuzioneService, IUtenteService utenteService)
         {
             _listaDistribuzioneService = listaDistribuzioneService;
             _utenteService = utenteService;
