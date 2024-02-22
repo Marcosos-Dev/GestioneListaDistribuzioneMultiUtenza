@@ -30,6 +30,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
             return _ctx.Set<T>().Find(id);
         }
 
+        public async Task<T> OttieniAsync(object id)
+        {
+            return await _ctx.Set<T>().FindAsync(id);
+        }
+
         public void Elimina(object id)
         {
             var entity = Ottieni(id);

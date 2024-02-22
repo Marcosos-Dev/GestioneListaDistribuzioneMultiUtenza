@@ -23,5 +23,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
         {
             return await _utenteRepository.GetUtenteByEmailPasswordAsync(email,password);
         }
+
+        public async Task<Utente> GetUtenteByIdAsync(object id)
+        {
+            return await _utenteRepository.OttieniAsync(id);
+        }
     }
 }
