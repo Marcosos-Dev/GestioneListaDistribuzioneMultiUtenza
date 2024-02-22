@@ -23,7 +23,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 
         [HttpPost]
         [Route("addNewList")]
-        public async Task<IActionResult> AggiungiLista(CreateListaDistribuzioneRequest request)
+        public async Task<IActionResult> AggiungiListaAsync(CreateListaDistribuzioneRequest request)
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             int IdUtente = int.Parse(claimsIdentity.Claims
