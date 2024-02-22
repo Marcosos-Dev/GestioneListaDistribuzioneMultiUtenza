@@ -31,17 +31,19 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IUtenteService,UtenteService>();
             builder.Services.AddScoped<UtenteRepository>();
-            builder.Services.AddScoped<IListaDistribuzione_Email, ListaDistribuzione_EmailService>();
+            builder.Services.AddScoped<IListaDistribuzione_EmailService, ListaDistribuzione_EmailService>();
             builder.Services.AddScoped<ListaDestinatariRepository>();
-            builder.Services.AddScoped<IListaDistribuzione, ListaDistribuzioneService>();
+            builder.Services.AddScoped<IListaDistribuzioneService, ListaDistribuzioneService>();
             builder.Services.AddScoped<ListaDistribuzioneRepository>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<EmailDestinatarioRepository>();
 
             /*var jwtAuthenticationOption = new JwtAuthenticationOption();
             configuration.GetSection("JwtAuthentication")
                 .Bind(jwtAuthenticationOption);*/
-            builder.Services.Configure<JwtAuthenticationOption>(
-            configuration.GetSection("JwtAuthentication")
-            );
+            //builder.Services.Configure<JwtAuthenticationOption>(
+            //configuration.GetSection("JwtAuthentication")
+            //);
 
             /*builder.Services.AddAuthentication(options =>
             {

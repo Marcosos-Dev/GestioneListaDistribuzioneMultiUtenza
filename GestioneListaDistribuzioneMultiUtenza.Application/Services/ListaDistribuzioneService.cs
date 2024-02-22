@@ -4,7 +4,7 @@ using GestioneListaDistribuzioneMultiUtenza.Models.Repositories;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 {
-    public class ListaDistribuzioneService : IListaDistribuzione
+    public class ListaDistribuzioneService : IListaDistribuzioneService
     {
         private readonly ListaDistribuzioneRepository _listaDistribuzioneRepository;
 

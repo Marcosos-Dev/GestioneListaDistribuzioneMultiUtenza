@@ -9,8 +9,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
     [Route("api/v1/[controller]")]
     public class ListeDistribuzioneController : ControllerBase
     {
-        private readonly IListaDistribuzione listaDistribuzioneService;
-        public ListeDistribuzioneController(IListaDistribuzione emailDestinatarioService)
+        private readonly IListaDistribuzioneService listaDistribuzioneService;
+        public ListeDistribuzioneController(IListaDistribuzioneService emailDestinatarioService)
         {
             listaDistribuzioneService = emailDestinatarioService;
         }

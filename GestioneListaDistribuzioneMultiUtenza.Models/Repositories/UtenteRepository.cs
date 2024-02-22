@@ -18,8 +18,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         public async Task<Utente> GetUtenteByEmailPasswordAsync(string email, string password)
         {
-            return await _ctx.Utenti.Where(u => u.Email.ToLower().Equals(email.ToLower()) && 
-            u.Password.Equals(password)).FirstOrDefaultAsync();
+            return await _ctx.Utenti.
+                Where(u => u.Email.ToLower().Equals(email.ToLower()) && 
+                        u.Password.Equals(password)).
+                FirstOrDefaultAsync();
         }
     }
 }

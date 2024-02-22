@@ -8,41 +8,40 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
     [Route("api/v1/[controller]")]
     public class ListaDistribuzione_EmailController :ControllerBase
     {
-        private readonly IListaDistribuzione_Email _listaDistribuzione_EmailService;
-        public ListaDistribuzione_EmailController(IListaDistribuzione_Email emailDestinatarioService)
+        private readonly IListaDistribuzione_EmailService _listaDistribuzione_EmailService;
+        public ListaDistribuzione_EmailController(IListaDistribuzione_EmailService emailDestinatarioService)
         {
             _listaDistribuzione_EmailService = emailDestinatarioService;
         }
 
         [HttpPost]
         [Route("addDestinatario")]
-        public async Task<IActionResult> AggiungiDestinatarioAsync(CreateListaDistribuzione_EmailRequest request)
+        public async Task<IActionResult> AggiungiDestinatarioAsync(AddDestinatarioToListRequest request)
         {
-            var item = request.ToEntity();
-            await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(item);
+            await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request);
             return Ok();
         }
 
         [HttpDelete]
         [Route("deleteDestinatario")]
-        public IActionResult DeleteDestinatarioFromList(CreateListaDistribuzione_EmailRequest request)
+        public IActionResult DeleteDestinatarioFromList(DeleteListaDistribuzione_EmailRequest request)
         {
             var item = request.ToEntity();
             _listaDistribuzione_EmailService.DeleteDestinatarioFromList(item);
             return Ok();
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("getLists")]
-        public IActionResult GetListaDistribuzioneFromEmail(CreateListaDistribuzione_EmailRequest request)
+        public IActionResult GetListaDistribuzioneFromEmail(GetListaFromEmailRequest request)
         {
-            _listaDistribuzione_EmailService.GetListaDistribuzioneFromEmail(request.emailId);
+            _listaDistribuzione_EmailService.GetListaDistribuzioneFromEmail(request);
             return Ok();
         }
 
         [HttpPost]
         [Route("sendEmail")]
-        public IActionResult SendEmailToList(CreateListaDistribuzione_EmailRequest request)
+        public IActionResult SendEmailToList(DeleteListaDistribuzione_EmailRequest request)
         {
             return BadRequest();
         }

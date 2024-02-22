@@ -2,8 +2,10 @@
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services
 {
-    public interface IListaDistribuzione
+    public interface IEmailService
     {
-        Task AggiungiListaAsync(ListaDistribuzione lista);
+        public Task AggiungiEmailAsync(string email);
+
+        public int OttieniIdEmail(string email);
     }
 }
