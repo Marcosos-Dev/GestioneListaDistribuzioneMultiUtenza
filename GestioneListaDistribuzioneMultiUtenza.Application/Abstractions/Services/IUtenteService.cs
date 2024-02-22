@@ -6,5 +6,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
     {
         Task AddUtenteAsync(Utente utente);
         Task<Utente> GetUtenteByEmailPasswordAsync(string email, string password);
+        Task<Utente> GetUtenteByIdAsync(object id);
     }
 }
