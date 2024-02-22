@@ -6,7 +6,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class TokenController : Controller
+    public class TokenController : ControllerBase
     {
         private readonly ITokenService _tokenService;
         public TokenController(ITokenService tokenService)
