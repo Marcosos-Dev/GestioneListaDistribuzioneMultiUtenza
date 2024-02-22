@@ -18,5 +18,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             await _utenteRepository.AggiungiAsync(utente);
             await _utenteRepository.SaveAsync();
         }
+
+        public async Task<Utente> GetUtenteByEmailPasswordAsync(string email, string password)
+        {
+            return await _utenteRepository.GetUtenteByEmailPasswordAsync(email,password);
+        }
     }
 }

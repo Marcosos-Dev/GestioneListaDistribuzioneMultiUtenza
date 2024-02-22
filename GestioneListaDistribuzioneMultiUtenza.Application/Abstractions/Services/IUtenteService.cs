@@ -5,5 +5,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
     public interface IUtenteService
     {
         Task AddUtenteAsync(Utente utente);
+        Task<Utente> GetUtenteByEmailPasswordAsync(string email, string password);
     }
 }

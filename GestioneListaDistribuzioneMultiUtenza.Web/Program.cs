@@ -1,9 +1,13 @@
 
 using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
+using GestioneListaDistribuzioneMultiUtenza.Application.Options;
 using GestioneListaDistribuzioneMultiUtenza.Application.Services;
 using GestioneListaDistribuzioneMultiUtenza.Models.Context;
 using GestioneListaDistribuzioneMultiUtenza.Models.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web
 {
@@ -24,12 +28,43 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
             });
 
             // Add services to the container.
+            builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IUtenteService,UtenteService>();
             builder.Services.AddScoped<UtenteRepository>();
             builder.Services.AddScoped<IListaDistribuzione_Email, ListaDistribuzione_EmailService>();
             builder.Services.AddScoped<ListaDestinatariRepository>();
             builder.Services.AddScoped<IListaDistribuzione, ListaDistribuzioneService>();
             builder.Services.AddScoped<ListaDistribuzioneRepository>();
+
+            /*var jwtAuthenticationOption = new JwtAuthenticationOption();
+            configuration.GetSection("JwtAuthentication")
+                .Bind(jwtAuthenticationOption);*/
+            builder.Services.Configure<JwtAuthenticationOption>(
+            configuration.GetSection("JwtAuthentication")
+            );
+
+            /*builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    string key = jwtAuthenticationOption.Key;
+                    var securityKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(key)
+                        );
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateLifetime = true,
+                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtAuthenticationOption.Issuer,
+                        IssuerSigningKey = securityKey
+                    };
+                });*/
 
             builder.Services.AddControllers();
 

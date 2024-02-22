@@ -16,7 +16,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 
         [HttpPost]
         [Route("new")]
-        public async Task<IActionResult> CreateUtente(CreateUtenteRequest request)
+        public async Task<IActionResult> CreateUtenteAsync(CreateUtenteRequest request)
         {
             //jwt
             var utente = request.toEntity();

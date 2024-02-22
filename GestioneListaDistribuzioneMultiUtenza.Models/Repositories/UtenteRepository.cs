@@ -1,5 +1,6 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Models.Context;
 using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,12 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
         public UtenteRepository(MyDbContext ctx) : base(ctx)
         {
 
+        }
+
+        public async Task<Utente> GetUtenteByEmailPasswordAsync(string email, string password)
+        {
+            return await _ctx.Utenti.Where(u => u.Email.ToLower().Equals(email.ToLower()) && 
+            u.Password.Equals(password)).FirstOrDefaultAsync();
         }
     }
 }
