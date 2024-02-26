@@ -21,7 +21,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
             return _ctx.EmailDestinatarie.
                 Where(x => x.Email.ToLower().Equals(email.ToLower())).
                 Select(X => X.IdEmailDestinatario).
-                First();
+                FirstOrDefault();
         }
     }
 }

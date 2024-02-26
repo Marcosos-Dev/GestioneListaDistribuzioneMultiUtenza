@@ -8,7 +8,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class ListaDistribuzione_EmailController :ControllerBase
+    public class ListaDistribuzione_EmailController : ControllerBase
     {
         private readonly IListaDistribuzione_EmailService _listaDistribuzione_EmailService;
         public ListaDistribuzione_EmailController(IListaDistribuzione_EmailService emailDestinatarioService)
@@ -37,6 +37,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("getLists")]
         public IActionResult GetListaDistribuzioneFromEmail(GetListaFromEmailRequest request)
         {
+            //TODO PAGINAZIONE
             var listeDiDistribuzione = _listaDistribuzione_EmailService.GetListaDistribuzioneFromEmail(request);
 
             var response = new GetListeFromEmailResponse();
