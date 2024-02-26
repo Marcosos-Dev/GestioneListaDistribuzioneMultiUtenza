@@ -19,11 +19,20 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         public void EliminaDestinatarioFromList(int listId, int emailId)
         {
+            //Controllo che esistano gli id
             var record = _ctx.UnioneListe_Destinatari.
                 Where(x => x.IdLista == listId && x.IdEmailDestinatario == emailId)
-                .First();
-            this.Elimina(record.IdListaDestinatari);
-            this.Save();
+                .FirstOrDefault();
+            if(record != default)
+            {
+                this.Elimina(record.IdListaDestinatari);
+                this.Save();
+            }
+            else
+            {
+                //errore
+            }
+            
         }
 
         public async Task EliminaDestinatarioFromListAsync(int listId, int emailId)
