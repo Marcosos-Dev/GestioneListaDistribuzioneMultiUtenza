@@ -1,5 +1,4 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
-using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 using GestioneListaDistribuzioneMultiUtenza.Models.Repositories;
 
@@ -22,30 +21,25 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             _listaDistribuzioneService = listaDistribuzioneService;
         }
 
-        public async Task AddDestinatarioToListAsync(AddDestinatarioToListRequest item)
+        public async Task AddDestinatarioToListAsync(int listId, string email)
         {
-            int id = _emailService.OttieniIdEmail(item.email);
+            int id = _emailService.OttieniIdEmail(email);
             if(id == 0)
             {
-                await _emailService.AggiungiEmailAsync(item.email);
+                await _emailService.AggiungiEmailAsync(email);
             }
 
             await _listaDistribuzioneEmailRepository.AggiungiAsync(new ListaDistribuzione_Email
             {
-                IdLista = item.listId,
+                IdLista = listId,
                 IdEmailDestinatario = id
             });
             await _listaDistribuzioneEmailRepository.SaveAsync();
         }
 
-        public void DeleteDestinatarioFromList(ListaDistribuzione_Email item)
+        public async Task DeleteDestinatarioFromListAsync(int IdLista, int IdEmail)
         {
-            _listaDistribuzioneEmailRepository.EliminaDestinatarioFromList(item.IdLista,item.IdEmailDestinatario);
-        }
-
-        public async Task DeleteDestinatarioFromListAsync(ListaDistribuzione_Email item)
-        {
-            await _listaDistribuzioneEmailRepository.EliminaDestinatarioFromListAsync(item.IdLista, item.IdEmailDestinatario);
+            await _listaDistribuzioneEmailRepository.EliminaDestinatarioFromListAsync(IdLista, IdEmail);
         }
 
         public async Task<List<ListaDistribuzione>> GetListaDistribuzioneOfUtenteFromEmail(int IdUtente, string email)

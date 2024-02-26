@@ -2,13 +2,9 @@
 using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
-using GestioneListaDistribuzioneMultiUtenza.Application.Services;
-using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Claims;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 {

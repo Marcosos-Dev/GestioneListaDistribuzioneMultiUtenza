@@ -26,7 +26,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             if (IdUtente.Equals(IdProprietario))
             {
-                await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request);
+                await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request.listId,request.email);
                 return Ok();
             }
             return BadRequest();
@@ -41,7 +41,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             if (IdUtente.Equals(IdProprietario))
             {
                 var item = request.ToEntity();
-                await _listaDistribuzione_EmailService.DeleteDestinatarioFromListAsync(item);
+                await _listaDistribuzione_EmailService.DeleteDestinatarioFromListAsync(item.IdLista,item.IdEmailDestinatario);
                 return Ok();
             }
             return BadRequest();
@@ -53,15 +53,18 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         {
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
 
-            var listeDiDistribuzione = _listaDistribuzione_EmailService.GetListaDistribuzioneOfUtenteFromEmail(IdUtente, request.email);
-            return Ok(listeDiDistribuzione);
-            /*var response = new GetListeFromEmailResponse();
-            response.Liste = listeDiDistribuzione.Select(s =>
-            new Application.Models.Dtos.ListaDistribuzioneDto(s)).ToList();
+            var listeDiDistribuzione = await _listaDistribuzione_EmailService.GetListaDistribuzioneOfUtenteFromEmail(IdUtente, request.email);
+
+            var response = new GetListeFromEmailResponse
+            {
+                
+                Liste = listeDiDistribuzione.Select(s =>
+            new Application.Models.Dtos.ListaDistribuzioneDto(s)).ToList()
+            };
 
             return Ok(ResponseFactory
               .WithSuccess(response)
-              );*/
+              );
         }
 
         [HttpPost]
