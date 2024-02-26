@@ -5,5 +5,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
     public interface IListaDistribuzioneService
     {
         Task AggiungiListaAsync(ListaDistribuzione lista);
+        Task<int> OttieniProprietarioListaAsync(int IdLista);
+        Task<List<ListaDistribuzione>> GetListeOfUtenteAsync(int IdUtente);
     }
 }

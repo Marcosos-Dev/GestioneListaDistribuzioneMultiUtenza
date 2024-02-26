@@ -3,9 +3,11 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
 using GestioneListaDistribuzioneMultiUtenza.Application.Services;
+using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
@@ -16,33 +18,26 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
     public class ListaDistribuzioneController : ControllerBase
     {
         private readonly IListaDistribuzioneService _listaDistribuzioneService;
-        private readonly IUtenteService _utenteService;
-        public ListaDistribuzioneController(IListaDistribuzioneService listaDistribuzioneService, IUtenteService utenteService)
+        public ListaDistribuzioneController(IListaDistribuzioneService listaDistribuzioneService)
         {
             _listaDistribuzioneService = listaDistribuzioneService;
-            _utenteService = utenteService;
         }
 
         [HttpPost]
         [Route("addNewList")]
         public async Task<IActionResult> AggiungiListaAsync(CreateListaDistribuzioneRequest request)
         {
-            var claimsIdentity = this.User.Identity as ClaimsIdentity;
-            int IdUtente = int.Parse(claimsIdentity.Claims
-                .Where(c => c.Type == "IdUtente").First().Value);
-
+            int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             var lista = request.ToEntity();
             lista.IdProprietario = IdUtente;
-            //lista.UtenteProprietario=await _utenteService.GetUtenteByIdAsync(IdUtente);
             await _listaDistribuzioneService.AggiungiListaAsync(lista);
 
             var response = new CreateListaDistribuzioneResponse();
             response.lista = new Application.Models.Dtos.ListaDistribuzioneDto(lista);
-
             return Ok(ResponseFactory
-              .WithSuccess(response)
-              );
+          .WithSuccess(response)
+          );
         }
-
+        
     }
 }

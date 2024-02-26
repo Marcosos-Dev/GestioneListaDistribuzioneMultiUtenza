@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Security.Claims;
 using System.Text;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web
@@ -114,9 +115,24 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
                 app.UseSwaggerUI();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.Use(async (HttpContext context, Func<Task> next) =>
+            {
+                var claimsIdentity = context.User.Identity as ClaimsIdentity;
+                if (claimsIdentity != null)
+                {
+                    var idUtenteClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == "IdUtente");
+                    if (idUtenteClaim != null && int.TryParse(idUtenteClaim.Value, out int idUtente))
+                    {
+                        context.Items["IdUtente"] = idUtente;
+                    }
+                }
+                await next.Invoke();
+            });
 
             app.Run();
         }

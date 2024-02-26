@@ -1,6 +1,8 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Models.Context;
 using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,20 +26,28 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
             this.Save();
         }
 
-        /*Dato un destinatario ottenere tutte le liste di distribuzione a lui associate
-        La ricerca dovrà paginare i risultanti, in base ad un parametro passato nella chiamata*/
-        public List<ListaDistribuzione> GetListaByEmail(int emailId)
+        public async Task EliminaDestinatarioFromListAsync(int listId, int emailId)
         {
-            //TODO PAGINARE
-            //Prendo gli id delle liste collegate alla mail
-            var idListe = _ctx.UnioneListe_Destinatari.
-                Where(l => l.IdEmailDestinatario == emailId).
-                Select(l => l.IdLista).
-                ToList();
-            //ritorno tutte le liste desiderate
-            return _ctx.ListeDistribuzione.
-                Where(i => idListe.Contains(i.IdLista))
-                .ToList(); ;
+            var record = _ctx.UnioneListe_Destinatari.
+                Where(x => x.IdLista == listId && x.IdEmailDestinatario == emailId)
+                .First();
+            this.Elimina(record.IdListaDestinatari);
+            await this.SaveAsync();
+        }
+
+
+        public async Task<List<ListaDistribuzione>> GetFilteredListeByEmail(List<ListaDistribuzione> liste, int IdEmail)
+        {
+            List<int> idsListe = liste.Select(item => item.IdLista).ToList();
+
+            var idListe = await _ctx.UnioneListe_Destinatari
+                            .Where(l => idsListe.Contains(l.IdLista) && l.IdEmailDestinatario == IdEmail)
+                            .Select(l => l.IdLista)
+                            .ToListAsync();
+
+            var filteredLists = liste.Where(item => idListe.Contains(item.IdLista)).ToList();
+
+            return filteredLists;
         }
     }
 }

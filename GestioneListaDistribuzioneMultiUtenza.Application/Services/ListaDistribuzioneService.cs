@@ -20,5 +20,16 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             await _listaDistribuzioneRepository.AggiungiAsync(lista);
             await _listaDistribuzioneRepository.SaveAsync();
         }
+
+        public async Task<int> OttieniProprietarioListaAsync(int IdLista)
+        {
+            var lista = await _listaDistribuzioneRepository.OttieniAsync(IdLista);
+            return lista.IdProprietario;
+        }
+
+        public async Task<List<ListaDistribuzione>> GetListeOfUtenteAsync(int IdUtente)
+        {
+            return await _listaDistribuzioneRepository.GetListeOfUtenteAsync(IdUtente);
+        }
     }
 }

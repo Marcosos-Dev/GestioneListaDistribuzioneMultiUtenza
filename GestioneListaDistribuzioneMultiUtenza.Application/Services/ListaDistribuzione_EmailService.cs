@@ -9,15 +9,17 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
     {
         private readonly ListaDestinatariRepository _listaDistribuzioneEmailRepository;
         private readonly IEmailService _emailService;
-        //private readonly IListaDistribuzioneService _listaDistribuzioneService;
+        private readonly IListaDistribuzioneService _listaDistribuzioneService;
 
         public ListaDistribuzione_EmailService(
             ListaDestinatariRepository listaDistribuzioneEmailRepository,
-            IEmailService emailService
+            IEmailService emailService,
+            IListaDistribuzioneService listaDistribuzioneService
             )
         {
             _listaDistribuzioneEmailRepository = listaDistribuzioneEmailRepository;
             _emailService = emailService;
+            _listaDistribuzioneService = listaDistribuzioneService;
         }
 
         public async Task AddDestinatarioToListAsync(AddDestinatarioToListRequest item)
@@ -40,12 +42,19 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             _listaDistribuzioneEmailRepository.EliminaDestinatarioFromList(item.IdLista,item.IdEmailDestinatario);
         }
 
-        public List<ListaDistribuzione> GetListaDistribuzioneFromEmail(GetListaFromEmailRequest request)
+        public async Task DeleteDestinatarioFromListAsync(ListaDistribuzione_Email item)
         {
-            int emailId = _emailService.OttieniIdEmail(request.email);
+            await _listaDistribuzioneEmailRepository.EliminaDestinatarioFromListAsync(item.IdLista, item.IdEmailDestinatario);
+        }
+
+        public async Task<List<ListaDistribuzione>> GetListaDistribuzioneOfUtenteFromEmail(int IdUtente, string email)
+        {
+            int emailId = _emailService.OttieniIdEmail(email);
             if (emailId != 0)
             {
-                return _listaDistribuzioneEmailRepository.GetListaByEmail(emailId);
+                var liste = await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente);
+
+                return await _listaDistribuzioneEmailRepository.GetFilteredListeByEmail(liste, emailId);
             }
             return new List<ListaDistribuzione>();
         }

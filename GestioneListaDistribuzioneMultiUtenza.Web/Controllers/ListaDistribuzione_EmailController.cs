@@ -11,41 +11,57 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
     public class ListaDistribuzione_EmailController :ControllerBase
     {
         private readonly IListaDistribuzione_EmailService _listaDistribuzione_EmailService;
-        public ListaDistribuzione_EmailController(IListaDistribuzione_EmailService emailDestinatarioService)
+        private readonly IListaDistribuzioneService _listaDistribuzioneService;
+        public ListaDistribuzione_EmailController(IListaDistribuzione_EmailService emailDestinatarioService, IListaDistribuzioneService listaDistribuzioneService)
         {
             _listaDistribuzione_EmailService = emailDestinatarioService;
+            _listaDistribuzioneService = listaDistribuzioneService;
         }
 
         [HttpPost]
         [Route("addDestinatario")]
         public async Task<IActionResult> AggiungiDestinatarioAsync(AddDestinatarioToListRequest request)
         {
-            await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request);
-            return Ok();
+            var IdProprietario = await _listaDistribuzioneService.OttieniProprietarioListaAsync(request.listId);
+            int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+            if (IdUtente.Equals(IdProprietario))
+            {
+                await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpDelete]
         [Route("deleteDestinatario")]
-        public IActionResult DeleteDestinatarioFromList(DeleteListaDistribuzione_EmailRequest request)
+        public async Task<IActionResult> DeleteDestinatarioFromList(DeleteListaDistribuzione_EmailRequest request)
         {
-            var item = request.ToEntity();
-            _listaDistribuzione_EmailService.DeleteDestinatarioFromList(item);
-            return Ok();
+            var IdProprietario = await _listaDistribuzioneService.OttieniProprietarioListaAsync(request.listId);
+            int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+            if (IdUtente.Equals(IdProprietario))
+            {
+                var item = request.ToEntity();
+                await _listaDistribuzione_EmailService.DeleteDestinatarioFromListAsync(item);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpPost]
         [Route("getLists")]
-        public IActionResult GetListaDistribuzioneFromEmail(GetListaFromEmailRequest request)
+        public async Task<IActionResult> GetListaDistribuzioneFromEmail(GetListaFromEmailRequest request)
         {
-            var listeDiDistribuzione = _listaDistribuzione_EmailService.GetListaDistribuzioneFromEmail(request);
+            int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
 
-            var response = new GetListeFromEmailResponse();
+            var listeDiDistribuzione = _listaDistribuzione_EmailService.GetListaDistribuzioneOfUtenteFromEmail(IdUtente, request.email);
+            return Ok(listeDiDistribuzione);
+            /*var response = new GetListeFromEmailResponse();
             response.Liste = listeDiDistribuzione.Select(s =>
             new Application.Models.Dtos.ListaDistribuzioneDto(s)).ToList();
 
             return Ok(ResponseFactory
               .WithSuccess(response)
-              );
+              );*/
         }
 
         [HttpPost]
