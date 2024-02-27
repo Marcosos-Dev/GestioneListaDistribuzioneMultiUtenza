@@ -26,10 +26,18 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             if (IdUtente.Equals(IdProprietario))
             {
-                await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request.listId,request.email);
-                return Ok();
+                var risultatoAggiunta = await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request.listId,request.email);
+                //possibile modifica con DTO e response adeguata
+                if (risultatoAggiunta == null)
+                {
+                    return BadRequest(ResponseFactory.WithError("Tentativo di aggiunta di un destinatario ad una lista in cui è già presente"));
+                }
             }
-            return BadRequest();
+            else
+            {
+                return BadRequest(ResponseFactory.WithError("Tentativo di aggiunta di un destinatario in una lista di cui non si è proprietari o che non esiste"));
+            }
+            return Ok(ResponseFactory.WithSuccess("Destinatario aggiunto con successo"));
         }
 
         [HttpDelete]
@@ -41,10 +49,17 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             if (IdUtente.Equals(IdProprietario))
             {
                 var item = request.ToEntity();
-                await _listaDistribuzione_EmailService.DeleteDestinatarioFromListAsync(item.IdLista,item.IdEmailDestinatario);
-                return Ok();
+                var deletedRecord = await _listaDistribuzione_EmailService.DeleteDestinatarioFromListAsync(item.IdLista,item.IdEmailDestinatario);
+                if(deletedRecord == null) 
+                {
+                    return BadRequest(ResponseFactory.WithError("I parametri forniti non hanno fornito nessun risultato"));
+                }
             }
-            return BadRequest();
+            else
+            {
+                return BadRequest(ResponseFactory.WithError("Tentativo di eliminazione di una email da una lista di cui non si è proprietari o che non esiste"));
+            }
+            return Ok(ResponseFactory.WithSuccess("Destinatario rimosso con successo"));
         }
 
         [HttpPost]
@@ -57,14 +72,16 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 
             var response = new GetListeFromEmailResponse
             {
-                
                 Liste = listeDiDistribuzione.Select(s =>
             new Application.Models.Dtos.ListaDistribuzioneDto(s)).ToList()
             };
 
-            return Ok(ResponseFactory
-              .WithSuccess(response)
-              );
+            if (listeDiDistribuzione.Count == 0)
+            {
+                return BadRequest(ResponseFactory.WithError("L'email fornita non esiste o non è associata a nessuna lista"));
+            }
+
+            return Ok(ResponseFactory.WithSuccess(response));
         }
 
         [HttpPost]
