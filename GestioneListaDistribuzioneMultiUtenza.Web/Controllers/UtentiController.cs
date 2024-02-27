@@ -20,6 +20,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("new")]
         public async Task<IActionResult> CreateUtenteAsync(CreateUtenteRequest request)
         {
+            if(_utenteService.GetUtenteByEmailAsync(request.Email) != null) 
+            {
+                return BadRequest();
+            }
             var utente = request.toEntity();
             await _utenteService.AddUtenteAsync(utente);
             //response
