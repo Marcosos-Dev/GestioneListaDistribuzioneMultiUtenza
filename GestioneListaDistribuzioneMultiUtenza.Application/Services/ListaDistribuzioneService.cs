@@ -24,7 +24,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
         public async Task<int> OttieniProprietarioListaAsync(int IdLista)
         {
             var lista = await _listaDistribuzioneRepository.OttieniAsync(IdLista);
-            return lista.IdProprietario;
+            if (lista != null)
+            {
+                return lista.IdProprietario;
+            }
+            return default;
         }
 
         public async Task<List<ListaDistribuzione>> GetListeOfUtenteAsync(int IdUtente)

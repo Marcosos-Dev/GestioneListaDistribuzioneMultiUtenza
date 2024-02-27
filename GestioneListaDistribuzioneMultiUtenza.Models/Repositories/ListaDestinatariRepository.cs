@@ -17,31 +17,25 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         }
 
-        public void EliminaDestinatarioFromList(int listId, int emailId)
+        public async Task<ListaDistribuzione_Email> CercaListaDistribuzione_Email(int listId, int emailId)
         {
-            //Controllo che esistano gli id
+            return _ctx.UnioneListe_Destinatari.
+                Where(x => x.IdLista == listId && x.IdEmailDestinatario == emailId)
+                .FirstOrDefault();
+        }
+
+        public async Task<ListaDistribuzione_Email> EliminaDestinatarioFromListAsync(int listId, int emailId)
+        {
             var record = _ctx.UnioneListe_Destinatari.
                 Where(x => x.IdLista == listId && x.IdEmailDestinatario == emailId)
                 .FirstOrDefault();
-            if(record != default)
+            if (record != default)
             {
                 this.Elimina(record.IdListaDestinatari);
-                this.Save();
+                await this.SaveAsync();
+                return record;
             }
-            else
-            {
-                //errore
-            }
-            
-        }
-
-        public async Task EliminaDestinatarioFromListAsync(int listId, int emailId)
-        {
-            var record = _ctx.UnioneListe_Destinatari.
-                Where(x => x.IdLista == listId && x.IdEmailDestinatario == emailId)
-                .First();
-            this.Elimina(record.IdListaDestinatari);
-            await this.SaveAsync();
+            return null;
         }
 
 
