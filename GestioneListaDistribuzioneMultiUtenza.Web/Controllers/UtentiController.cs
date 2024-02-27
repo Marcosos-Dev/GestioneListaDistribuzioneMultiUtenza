@@ -22,7 +22,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         {
             if(_utenteService.GetUtenteByEmailAsync(request.Email) != null) 
             {
-                return BadRequest();
+                return BadRequest(ResponseFactory.WithError("L'utente già esiste"));
             }
             var utente = request.toEntity();
             await _utenteService.AddUtenteAsync(utente);
