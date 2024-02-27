@@ -54,10 +54,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
 
             var listeDiDistribuzione = await _listaDistribuzione_EmailService.GetListaDistribuzioneOfUtenteFromEmail(IdUtente, request.email);
+            
 
             var response = new GetListeFromEmailResponse
             {
-                
                 Liste = listeDiDistribuzione.Select(s =>
             new Application.Models.Dtos.ListaDistribuzioneDto(s)).ToList()
             };
