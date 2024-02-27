@@ -18,7 +18,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         public async Task<IActionResult> CreateTokenAsync(CreateTokenRequest request)
         {
             string token = await _tokenService.CreateTokenAsync(request);
-            return Ok(token);
+            if(token != null)
+            {
+                return Ok(token);
+            }
+            return BadRequest();
         }
     }
 }
