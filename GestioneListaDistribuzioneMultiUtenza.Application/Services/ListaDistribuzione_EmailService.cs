@@ -34,7 +34,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
                 IdEmailDestinatario = id
             };
 
-            if(_listaDistribuzioneEmailRepository.CercaListaDistribuzione_Email(listId, id) == null)
+            if(await _listaDistribuzioneEmailRepository.CercaListaDistribuzione_Email(listId, id) == null)
             {
                 await _listaDistribuzioneEmailRepository.AggiungiAsync(lista);
                 await _listaDistribuzioneEmailRepository.SaveAsync();
@@ -49,16 +49,17 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             return await _listaDistribuzioneEmailRepository.EliminaDestinatarioFromListAsync(IdLista, IdEmail);
         }
 
-        public async Task<List<ListaDistribuzione>> GetListaDistribuzioneOfUtenteFromEmail(int IdUtente, string email)
+        public async Task<(List<ListaDistribuzione>, int)> GetListaDistribuzioneOfUtente(int IdUtente,
+            string? email, int from, int num)
         {
-            int emailId = _emailService.OttieniIdEmail(email);
-            if (emailId != 0)
+            if (string.IsNullOrEmpty(email))
             {
-                var liste = await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente);
-
-                return await _listaDistribuzioneEmailRepository.GetFilteredListeByEmail(liste, emailId);
+                return await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente, from, num);
             }
-            return new List<ListaDistribuzione>();
+            var liste = await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente, null, null);
+            var idEmail = _emailService.OttieniIdEmail(email);
+            return await _listaDistribuzioneEmailRepository.GetFilteredListeByEmail(liste.Item1, idEmail, from, num);
+
         }
 
         public void SendEmailToList(int listID)

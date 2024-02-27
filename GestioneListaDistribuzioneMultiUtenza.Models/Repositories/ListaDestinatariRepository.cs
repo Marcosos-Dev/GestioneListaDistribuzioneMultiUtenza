@@ -19,9 +19,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         public async Task<ListaDistribuzione_Email> CercaListaDistribuzione_Email(int listId, int emailId)
         {
-            return _ctx.UnioneListe_Destinatari.
+            return await _ctx.UnioneListe_Destinatari.
                 Where(x => x.IdLista == listId && x.IdEmailDestinatario == emailId)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
         public async Task<ListaDistribuzione_Email> EliminaDestinatarioFromListAsync(int listId, int emailId)
@@ -39,18 +39,20 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
         }
 
 
-        public async Task<List<ListaDistribuzione>> GetFilteredListeByEmail(List<ListaDistribuzione> liste, int IdEmail)
+        public async Task<(List<ListaDistribuzione>, int)> GetFilteredListeByEmail(List<ListaDistribuzione> listeUtente, int IdEmail,
+            int from, int num)
         {
-            List<int> idsListe = liste.Select(item => item.IdLista).ToList();
+            List<int> idsListe = listeUtente.Select(l => l.IdLista).ToList();
 
             var idListe = await _ctx.UnioneListe_Destinatari
                             .Where(l => idsListe.Contains(l.IdLista) && l.IdEmailDestinatario == IdEmail)
                             .Select(l => l.IdLista)
                             .ToListAsync();
 
-            var filteredLists = liste.Where(item => idListe.Contains(item.IdLista)).ToList();
-
-            return filteredLists;
+            var filteredLists = listeUtente.Where(l => idListe.Contains(l.IdLista)).ToList();
+            int totalNum = filteredLists.Count();
+            var filteredLists1 = filteredLists.OrderBy(l => l.NomeLista).Skip((int)from).Take((int)num).ToList();
+            return (filteredLists1, totalNum);
         }
     }
 }

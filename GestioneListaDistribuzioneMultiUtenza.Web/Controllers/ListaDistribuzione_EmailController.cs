@@ -68,13 +68,15 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         {
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
 
-            var listeDiDistribuzione = await _listaDistribuzione_EmailService.GetListaDistribuzioneOfUtenteFromEmail(IdUtente, request.email);
+            var (listeDiDistribuzione, totalNum) = await _listaDistribuzione_EmailService.GetListaDistribuzioneOfUtente(IdUtente, 
+                request.email, request.PageNumber*request.PageSize, request.PageSize);
             
 
             var response = new GetListeFromEmailResponse
             {
                 Liste = listeDiDistribuzione.Select(s =>
-            new Application.Models.Dtos.ListaDistribuzioneDto(s)).ToList()
+            new Application.Models.Dtos.ListaDistribuzioneDto(s)).ToList(),
+                NumeroPagine = totalNum
             };
 
             if (listeDiDistribuzione.Count == 0)
