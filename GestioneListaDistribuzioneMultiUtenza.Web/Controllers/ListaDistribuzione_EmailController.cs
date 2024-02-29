@@ -96,9 +96,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             if (IdUtente.Equals(IdProprietario))
             {
-                var emailSent = await _listaDistribuzione_EmailService.SendEmailToListAsync(request.listId);
-                //var risultatoAggiunta = await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request.listId, request.email);
-                //possibile modifica con DTO e response adeguata
+                var emailSent = await _listaDistribuzione_EmailService.SendEmailToListAsync(request.Subject, request.Body, request.listId);
                 var response = new SendEmailToListResponse
                 {
                     EmailDestinatariDto = emailSent.Select(s =>
