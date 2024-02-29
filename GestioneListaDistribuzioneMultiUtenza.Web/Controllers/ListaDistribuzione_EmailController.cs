@@ -2,6 +2,7 @@
 using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
+using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
@@ -82,7 +83,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             if (listeDiDistribuzione.Count == 0)
             {
                 return BadRequest(ResponseFactory.WithError("L'email fornita non esiste o non è associata a nessuna lista" +
-                    "o l'utente non possiede alcuna lista"));
+                    " o l'utente non possiede alcuna lista"));
             }
 
             return Ok(ResponseFactory.WithSuccess(response));
@@ -96,10 +97,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             if (IdUtente.Equals(IdProprietario))
             {
-                var emailSent = await _listaDistribuzione_EmailService.SendEmailToListAsync(request.Subject, request.Body, request.listId);
+                List<EmailDestinatario> emailSent = await _listaDistribuzione_EmailService.SendEmailToListAsync(request.Subject, request.Body, request.listId);
                 var response = new SendEmailToListResponse
                 {
-                    EmailDestinatariDto = emailSent.Select(s =>
+                    EmailDestinatari = emailSent.Select(s =>
                 new Application.Models.Dtos.EmailDestinatariDto(s)).ToList()
                 };
                 return Ok(ResponseFactory.WithSuccess(response));
