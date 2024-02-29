@@ -18,9 +18,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             _jwtAuthOption = jwtAuthOption.Value;
             _utenteService = utenteService;
         }
-        public async Task<string> CreateTokenAsync(CreateTokenRequest request)
+        public async Task<string> CreateTokenAsync(string email, string password)
         {
-            var utente = await _utenteService.GetUtenteByEmailPasswordAsync(request.Email, request.Password);
+            var utente = await _utenteService.GetUtenteByEmailPasswordAsync(email, password);
             
             if(utente != null)
             {

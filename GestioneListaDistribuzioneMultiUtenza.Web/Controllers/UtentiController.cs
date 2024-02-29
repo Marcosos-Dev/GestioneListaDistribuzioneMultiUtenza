@@ -20,7 +20,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("new")]
         public async Task<IActionResult> CreateUtenteAsync(CreateUtenteRequest request)
         {
-            if(_utenteService.GetUtenteByEmailAsync(request.Email) != null) 
+            if(await _utenteService.GetUtenteByEmailAsync(request.Email) != null) 
             {
                 return BadRequest(ResponseFactory.WithError("L'utente già esiste"));
             }

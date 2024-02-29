@@ -4,6 +4,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
 {
     public interface ITokenService
     {
-        Task<string> CreateTokenAsync(CreateTokenRequest request);
+        Task<string> CreateTokenAsync(string email, string password);
     }
 }
