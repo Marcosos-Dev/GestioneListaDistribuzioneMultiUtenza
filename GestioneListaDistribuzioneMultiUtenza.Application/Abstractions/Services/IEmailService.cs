@@ -6,6 +6,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
     {
         public Task AggiungiEmailAsync(string email);
 
-        public int OttieniIdEmail(string email);
+        public Task<int> OttieniIdEmail(string email);
     }
 }

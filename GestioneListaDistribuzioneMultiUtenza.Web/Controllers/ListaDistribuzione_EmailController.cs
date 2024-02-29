@@ -86,9 +86,26 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 
         [HttpPost]
         [Route("sendEmail")]
-        public IActionResult SendEmailToList(DeleteListaDistribuzione_EmailRequest request)
+        public async Task<IActionResult> SendEmailToList(SendEmailToListRequest request)
         {
-            return BadRequest();
+            var IdProprietario = await _listaDistribuzioneService.OttieniProprietarioListaAsync(request.listId);
+            int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+            if (IdUtente.Equals(IdProprietario))
+            {
+                var emailSent = await _listaDistribuzione_EmailService.SendEmailToListAsync(request.listId);
+                //var risultatoAggiunta = await _listaDistribuzione_EmailService.AddDestinatarioToListAsync(request.listId, request.email);
+                //possibile modifica con DTO e response adeguata
+                var response = new SendEmailToListResponse
+                {
+                    EmailDestinatariDto = emailSent.Select(s =>
+                new Application.Models.Dtos.EmailDestinatariDto(s)).ToList()
+                };
+                return Ok(ResponseFactory.WithSuccess(response));
+            }
+            else
+            {
+                return BadRequest(ResponseFactory.WithError("Tentativo di invio di email in una lista di cui non si è proprietari o che non esiste"));
+            }
         }
     }
 }

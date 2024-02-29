@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Security.Claims;
 using System.Text;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web
@@ -41,7 +40,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<EmailDestinatarioRepository>();
             builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
-            
 
             builder.Services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -101,7 +99,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
             builder.Services.Configure<JwtAuthenticationOption>(
             configuration.GetSection("JwtAuthentication")
             );
-
             builder.Services.Configure<EmailOption>(
                 configuration.GetSection("EmailOption")
                 );

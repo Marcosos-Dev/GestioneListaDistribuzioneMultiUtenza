@@ -1,7 +1,9 @@
-﻿namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services
+﻿using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+
+namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services
 {
     public interface IEmailSenderService
     {
-        public Task SendEmailAsync(string subject, string body);
+        public Task<List<EmailDestinatario>> SendEmailAsync(string subject, string body, List<EmailDestinatario> email);
     }
 }

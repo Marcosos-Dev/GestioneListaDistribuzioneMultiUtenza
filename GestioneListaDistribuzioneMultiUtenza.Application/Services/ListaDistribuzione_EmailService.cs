@@ -7,23 +7,26 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
     public class ListaDistribuzione_EmailService : IListaDistribuzione_EmailService
     {
         private readonly ListaDestinatariRepository _listaDistribuzioneEmailRepository;
+        private readonly IEmailSenderService _emailSenderService;
         private readonly IEmailService _emailService;
         private readonly IListaDistribuzioneService _listaDistribuzioneService;
 
         public ListaDistribuzione_EmailService(
             ListaDestinatariRepository listaDistribuzioneEmailRepository,
             IEmailService emailService,
-            IListaDistribuzioneService listaDistribuzioneService
+            IListaDistribuzioneService listaDistribuzioneService,
+            IEmailSenderService emailSenderService
             )
         {
             _listaDistribuzioneEmailRepository = listaDistribuzioneEmailRepository;
             _emailService = emailService;
             _listaDistribuzioneService = listaDistribuzioneService;
+            _emailSenderService = emailSenderService;
         }
 
         public async Task<ListaDistribuzione_Email> AddDestinatarioToListAsync(int listId, string email)
         {
-            int id = _emailService.OttieniIdEmail(email);
+            int id = await _emailService.OttieniIdEmail(email);
             if(id == 0)
             {
                 await _emailService.AggiungiEmailAsync(email);
@@ -51,7 +54,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 
         public async Task<List<ListaDistribuzione>> GetListaDistribuzioneOfUtenteFromEmail(int IdUtente, string email)
         {
-            int emailId = _emailService.OttieniIdEmail(email);
+            int emailId = await _emailService.OttieniIdEmail(email);
             if (emailId != 0)
             {
                 var liste = await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente);
@@ -61,9 +64,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             return new List<ListaDistribuzione>();
         }
 
-        public void SendEmailToList(int listID)
+        public async Task<List<EmailDestinatario>> SendEmailToListAsync(int listID)
         {
-            throw new NotImplementedException();
+            return await _emailSenderService.SendEmailAsync("", "", listID);
         }
     }
 }

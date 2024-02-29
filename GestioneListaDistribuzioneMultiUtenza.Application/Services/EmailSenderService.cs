@@ -5,10 +5,11 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
 using Azure.Identity;
 using GestioneListaDistribuzioneMultiUtenza.Application.Options;
 using Microsoft.Extensions.Options;
+using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 {
-    public class EmailSenderService :IEmailSenderService
+    public class EmailSenderService : IEmailSenderService
     {
         private readonly EmailOption _emailOption;
         public EmailSenderService(IOptions<EmailOption> emailOptions)
@@ -19,8 +20,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
         //nome mail = per ora INFO di default
         //subject = oggetto della mail
         //body = contenuto
-        public async Task SendEmailAsync(string subject, string body)
+        public async Task<List<EmailDestinatario>> SendEmailAsync(string subject, string body, List<EmailDestinatario> email)
         {
+            //1-Prendo tutte le mail tramite repo _listaDist_email
+
+            //2-Trovo la lista di stringa di mail effettive tramite _emailService
+            
+            //3-Mando la mail tramite _emailSenderService
             List<Recipient> recipients = new List<Recipient>(); //va presa tramite gli altri service
             recipients.Add(new Recipient()
             {
@@ -62,6 +68,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             /*await client.Users[_emailOption.From]
                 .SendMail.PostAsync(postRequestBody);*/
 
+            //Ritorno la lista di mail a cui ho inviato la mail
+            return new List<EmailDestinatario>();
         }
     }
 }

@@ -24,9 +24,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             await _emailRepository.SaveAsync();
         }
 
-        public int OttieniIdEmail(string email)
+        public async Task<int> OttieniIdEmail(string email)
         {
-            return _emailRepository.OttieniIdFromEmail(email);
+            return await _emailRepository.OttieniIdFromEmail(email);
         }
     }
 }
