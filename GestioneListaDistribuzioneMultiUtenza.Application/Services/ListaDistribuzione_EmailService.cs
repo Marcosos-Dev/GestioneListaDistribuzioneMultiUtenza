@@ -60,14 +60,20 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
                 return await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente, from, num);
             }
             var liste = await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente, null, null);
-            var idEmail = _emailService.OttieniIdEmail(email);
+            var idEmail = await _emailService.OttieniIdEmail(email);
             return await _listaDistribuzioneEmailRepository.GetFilteredListeByEmail(liste.Item1, idEmail, from, num);
 
         }
 
         public async Task<List<EmailDestinatario>> SendEmailToListAsync(int listID)
         {
-            return await _emailSenderService.SendEmailAsync("", "", listID);
+            List<int> listaEmailUtente = await _listaDistribuzioneEmailRepository.GetEmailIdFromListId(listID);
+            List<EmailDestinatario> emails = await _emailService.OttieniEmailFromId(listaEmailUtente);
+            if (emails.Count != 0)
+            {
+                return await _emailSenderService.SendEmailAsync("", "", emails);
+            }
+            return new List<EmailDestinatario>();
         }
     }
 }

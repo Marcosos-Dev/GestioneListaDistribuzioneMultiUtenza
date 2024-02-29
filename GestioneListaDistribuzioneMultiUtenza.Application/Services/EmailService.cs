@@ -28,5 +28,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
         {
             return await _emailRepository.OttieniIdFromEmail(email);
         }
+
+        public async Task<List<EmailDestinatario>> OttieniEmailFromId(List<int> listId)
+        {
+            return await _emailRepository.OttieniEmailFromId(listId);
+        }
     }
 }

@@ -24,5 +24,12 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
                 Select(X => X.IdEmailDestinatario).
                 FirstOrDefaultAsync();
         }
+
+        public async Task<List<EmailDestinatario>> OttieniEmailFromId(List<int> items)
+        {
+            return await _ctx.EmailDestinatarie.
+                Where(x => items.Contains(x.IdEmailDestinatario)).
+                ToListAsync();
+        }
     }
 }

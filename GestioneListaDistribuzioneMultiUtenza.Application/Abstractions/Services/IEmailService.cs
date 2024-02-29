@@ -7,5 +7,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
         public Task AggiungiEmailAsync(string email);
 
         public Task<int> OttieniIdEmail(string email);
+
+        public Task<List<EmailDestinatario>> OttieniEmailFromId(List<int> listId);
     }
 }

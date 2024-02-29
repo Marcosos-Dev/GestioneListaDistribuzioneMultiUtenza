@@ -17,6 +17,14 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         }
 
+        public async Task<List<int>> GetEmailIdFromListId(int listId)
+        {
+            return await _ctx.UnioneListe_Destinatari.
+                Where(x => x.IdLista == listId).
+                Select(x => x.IdEmailDestinatario).
+                ToListAsync();
+        }
+
         public async Task<ListaDistribuzione_Email> CercaListaDistribuzione_Email(int listId, int emailId)
         {
             return await _ctx.UnioneListe_Destinatari.
