@@ -67,7 +67,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         public async Task<IActionResult> GetListaDistribuzioneFromEmail(GetListaFromEmailRequest request)
         {
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
-
+            //page size deve essere >0
             var (listeDiDistribuzione, totalNum) = await _listaDistribuzione_EmailService.GetListaDistribuzioneOfUtente(IdUtente, 
                 request.email, request.PageNumber*request.PageSize, request.PageSize);
             
