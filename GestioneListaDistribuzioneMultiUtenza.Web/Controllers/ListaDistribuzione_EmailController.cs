@@ -81,7 +81,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 
             if (listeDiDistribuzione.Count == 0)
             {
-                return BadRequest(ResponseFactory.WithError("L'email fornita non esiste o non è associata a nessuna lista"));
+                return BadRequest(ResponseFactory.WithError("L'email fornita non esiste o non è associata a nessuna lista" +
+                    "o l'utente non possiede alcuna lista"));
             }
 
             return Ok(ResponseFactory.WithSuccess(response));

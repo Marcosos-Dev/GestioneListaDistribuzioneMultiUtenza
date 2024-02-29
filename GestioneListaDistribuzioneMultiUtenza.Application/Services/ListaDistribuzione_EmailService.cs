@@ -31,6 +31,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             {
                 await _emailService.AggiungiEmailAsync(email);
             }
+            id = await _emailService.OttieniIdEmail(email);
             var lista = new ListaDistribuzione_Email
             {
                 IdLista = listId,
