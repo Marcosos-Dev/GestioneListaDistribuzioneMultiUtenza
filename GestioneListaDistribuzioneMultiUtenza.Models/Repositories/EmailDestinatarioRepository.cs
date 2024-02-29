@@ -1,5 +1,6 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Models.Context;
 using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         }
 
-        public int OttieniIdFromEmail(string email)
+        public async Task<int> OttieniIdFromEmail(string email)
         {
-            return _ctx.EmailDestinatarie.
+            return await _ctx.EmailDestinatarie.
                 Where(x => x.Email.ToLower().Equals(email.ToLower())).
                 Select(X => X.IdEmailDestinatario).
-                FirstOrDefault();
+                FirstOrDefaultAsync();
+                
         }
     }
 }

@@ -23,11 +23,12 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 
         public async Task<ListaDistribuzione_Email> AddDestinatarioToListAsync(int listId, string email)
         {
-            int id = _emailService.OttieniIdEmail(email);
+            int id = await _emailService.OttieniIdEmail(email);
             if(id == 0)
             {
                 await _emailService.AggiungiEmailAsync(email);
             }
+            id = await _emailService.OttieniIdEmail(email);
             var lista = new ListaDistribuzione_Email
             {
                 IdLista = listId,
@@ -57,7 +58,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
                 return await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente, from, num);
             }
             var liste = await _listaDistribuzioneService.GetListeOfUtenteAsync(IdUtente, null, null);
-            var idEmail = _emailService.OttieniIdEmail(email);
+            var idEmail = await _emailService.OttieniIdEmail(email);
             return await _listaDistribuzioneEmailRepository.GetFilteredListeByEmail(liste.Item1, idEmail, from, num);
 
         }
