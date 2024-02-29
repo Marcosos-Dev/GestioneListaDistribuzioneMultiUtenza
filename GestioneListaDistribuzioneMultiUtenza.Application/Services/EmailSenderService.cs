@@ -22,26 +22,17 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
         //body = contenuto
         public async Task<List<EmailDestinatario>> SendEmailAsync(string subject, string body, List<EmailDestinatario> email)
         {
-            //1-Prendo tutte le mail tramite repo _listaDist_email
-
-            //2-Trovo la lista di stringa di mail effettive tramite _emailService
-            
-            //3-Mando la mail tramite _emailSenderService
-            List<Recipient> recipients = new List<Recipient>(); //va presa tramite gli altri service
-            recipients.Add(new Recipient()
+            List<Recipient> recipients = new List<Recipient>();
+            foreach (var Email in email) 
             {
-                EmailAddress = new EmailAddress()
+                recipients.Add(new Recipient()
                 {
-                    Address = "marcobellilorenzo@gmail.com"
-                }
-            });
-            recipients.Add(new Recipient()
-            {
-                EmailAddress = new EmailAddress()
-                {
-                    Address = "lorenzo.marcobelli@studenti.unicam.it"
-                }
-            });
+                    EmailAddress = new EmailAddress()
+                    {
+                        Address = Email.Email
+                    }
+                });
+            }
 
             var clientCredential = new ClientSecretCredential(_emailOption.TenantId
                 , _emailOption.ClientId
@@ -69,7 +60,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
                 .SendMail.PostAsync(postRequestBody);*/
 
             //Ritorno la lista di mail a cui ho inviato la mail
-            return new List<EmailDestinatario>();
+            return email;
         }
     }
 }

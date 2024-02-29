@@ -71,13 +71,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 
         }
 
-        public async Task<List<EmailDestinatario>> SendEmailToListAsync(int listID)
+        public async Task<List<EmailDestinatario>> SendEmailToListAsync(string subject, string body, int listID)
         {
             List<int> listaEmailUtente = await _listaDistribuzioneEmailRepository.GetEmailIdFromListId(listID);
             List<EmailDestinatario> emails = await _emailService.OttieniEmailFromId(listaEmailUtente);
             if (emails.Count != 0)
             {
-                return await _emailSenderService.SendEmailAsync("", "", emails);
+                return await _emailSenderService.SendEmailAsync(subject, body, emails);
             }
             return new List<EmailDestinatario>();
         }
