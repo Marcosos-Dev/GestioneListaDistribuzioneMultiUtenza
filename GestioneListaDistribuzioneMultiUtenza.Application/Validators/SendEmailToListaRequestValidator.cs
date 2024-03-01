@@ -12,11 +12,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
                 .WithMessage("Il campo subject è obbligatorio (nullo)")
                 .NotEmpty()
                 .WithMessage("Il campo subject è obbligatorio (vuoto)");
+
             RuleFor(r => r.Body)
                 .NotNull()
                 .WithMessage("Il campo page number è obbligatorio (nullo)")
                 .NotEmpty()
                 .WithMessage("Il campo page number è obbligatorio (vuoto)");
+
             RuleFor(r => r.idLista)
                 .NotNull()
                 .WithMessage("Il campo id lista è obbligatorio (nullo)")

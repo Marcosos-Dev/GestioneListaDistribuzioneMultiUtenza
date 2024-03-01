@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using GestioneListaDistribuzioneMultiUtenza.Application.Extensions;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
@@ -25,19 +24,20 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
                 .WithMessage("Il cognome deve essere lungo almeno 3 caratteri");
 
             RuleFor(r => r.Email)
-                .NotEmpty()
+                .NotNull()
                 .WithMessage("Il campo email è obbligatorio (nullo)")
-                .NotNull()
-                .WithMessage("Il campo email è obbligatorio (vuoto)")
-                .WithRegEx("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", "email non valida");
-                
-            RuleFor(r => r.Password)
                 .NotEmpty()
-                .WithMessage("Il campo password è obbligatorio (nullo)")
+                .WithMessage("Il campo email è obbligatorio (vuoto)")
+                .Matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
+                .WithMessage("email non valida");
+
+            RuleFor(r => r.Password)
                 .NotNull()
+                .WithMessage("Il campo password è obbligatorio (nullo)")
+                .NotEmpty()
                 .WithMessage("Il campo password è obbligatorio (vuoto)")
-                .WithRegEx("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z\\s])[a-zA-Z\\d\\S]{8,}$", "password non valida");
-                //almeno 8 caratteri, almeno 1: maiuscolo, minuscolo, numero e speciale
+                .Matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z\\s])[a-zA-Z\\d\\S]{8,}$")
+                .WithMessage("password non valida, almeno 8 caratteri tra cui almeno 1: maiuscolo, minuscolo, numero e speciale");
         }
     }
 }

@@ -11,7 +11,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
                 .NotNull()
                 .WithMessage("Il campo nome lista è obbligatorio (nullo)")
                 .NotEmpty()
-                .WithMessage("Il campo nome lista è obbligatorio (vuoto)");
+                .WithMessage("Il campo nome lista è obbligatorio (vuoto)")
+                .MinimumLength(3)
+                .WithMessage("Il nome della lista deve essere lungo almeno 3 caratteri");
         }
     }
 }
