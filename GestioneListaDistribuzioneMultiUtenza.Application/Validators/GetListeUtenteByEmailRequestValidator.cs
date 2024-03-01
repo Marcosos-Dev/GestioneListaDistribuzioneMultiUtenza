@@ -4,18 +4,18 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
 {
-    public class GetListaDistribuzioneByEmailValidator : AbstractValidator<GetListeUtenteByEmailRequest>
+    public class GetListeUtenteByEmailRequestValidator : AbstractValidator<GetListeUtenteByEmailRequest>
     {
-        public GetListaDistribuzioneByEmailValidator()
+        public GetListeUtenteByEmailRequestValidator()
         {
-            RuleFor(l => l.PageSize)
+            RuleFor(r => r.PageSize)
                 .NotNull()
                 .WithMessage("Il campo page size è obbligatorio (nullo)")
                 .NotEmpty()
                 .WithMessage("Il campo page size è obbligatorio (vuoto)")
                 .LessThanOrEqualTo(0)
                 .WithMessage("Il campo page size deve essere maggiore di 0");
-            RuleFor(l => l.PageNumber)
+            RuleFor(r => r.PageNumber)
                 .NotNull()
                 .WithMessage("Il campo page number è obbligatorio (nullo)")
                 .NotEmpty()

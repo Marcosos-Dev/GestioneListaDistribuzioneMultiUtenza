@@ -4,9 +4,9 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
 {
-    public class AddDestinatarioToListValidator : AbstractValidator<AddListaDistribuzione_DestinatarioRequest>
+    public class AddListaDistribuzione_DestinatarioRequestValidator : AbstractValidator<AddListaDistribuzione_DestinatarioRequest>
     {
-        public AddDestinatarioToListValidator() 
+        public AddListaDistribuzione_DestinatarioRequestValidator() 
         {
             RuleFor(r => r.idLista)
                 .NotNull()
