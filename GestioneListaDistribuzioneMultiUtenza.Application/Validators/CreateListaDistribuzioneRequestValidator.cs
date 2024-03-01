@@ -3,11 +3,11 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
 {
-    public class CreateListaRequestValidator : AbstractValidator<CreateListaDistribuzioneRequest>
+    public class CreateListaDistribuzioneRequestValidator : AbstractValidator<CreateListaDistribuzioneRequest>
     {
-        public CreateListaRequestValidator() 
+        public CreateListaDistribuzioneRequestValidator() 
         {
-            RuleFor(l => l.NomeLista)
+            RuleFor(r => r.NomeLista)
                 .NotNull()
                 .WithMessage("Il campo nome lista è obbligatorio (nullo)")
                 .NotEmpty()

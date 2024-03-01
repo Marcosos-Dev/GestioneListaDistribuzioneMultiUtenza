@@ -3,21 +3,21 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
 {
-    public class SendEmailToListValidator : AbstractValidator<SendEmailToListaRequest>
+    public class SendEmailToListaRequestValidator : AbstractValidator<SendEmailToListaRequest>
     {
-        public SendEmailToListValidator()
+        public SendEmailToListaRequestValidator()
         {
-            RuleFor(l => l.Subject)
+            RuleFor(r => r.Subject)
                 .NotNull()
                 .WithMessage("Il campo subject è obbligatorio (nullo)")
                 .NotEmpty()
                 .WithMessage("Il campo subject è obbligatorio (vuoto)");
-            RuleFor(l => l.Body)
+            RuleFor(r => r.Body)
                 .NotNull()
                 .WithMessage("Il campo page number è obbligatorio (nullo)")
                 .NotEmpty()
                 .WithMessage("Il campo page number è obbligatorio (vuoto)");
-            RuleFor(l => l.listId)
+            RuleFor(r => r.idLista)
                 .NotNull()
                 .WithMessage("Il campo id lista è obbligatorio (nullo)")
                 .NotEmpty()
