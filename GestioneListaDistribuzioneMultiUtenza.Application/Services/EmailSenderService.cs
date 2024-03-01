@@ -56,8 +56,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             postRequestBody.SaveToSentItems = true;
 
             //TOGLIERE COMMENTO SE SI VUOLE INVIARE LA MAIL
-            /*await client.Users[_emailOption.From]
-                .SendMail.PostAsync(postRequestBody);*/
+            await client.Users[_emailOption.From]
+                .SendMail.PostAsync(postRequestBody);
 
             //Ritorno la lista di mail a cui ho inviato la mail
             return email;
