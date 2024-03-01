@@ -2,6 +2,7 @@
 using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
+using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
@@ -96,11 +97,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             if (IdUtente.Equals(IdProprietario))
             {
-                var emailSent = await _listaDistribuzione_DestinatarioService.SendEmailToListaDistribuzioneAsync(request.Subject, request.Body, request.idLista);
+                var emailSent = await _listaDistribuzione_EmailService.SendEmailToListAsync(request.Subject, request.Body, request.listId);
                 var response = new SendEmailToListResponse
                 {
-                    DestinatariDto = emailSent.Select(s =>
-                new Application.Models.Dtos.DestinatarioDto(s)).ToList()
+                    EmailDestinatariDto = emailSent.Select(s =>
+                new Application.Models.Dtos.EmailDestinatariDto(s)).ToList()
                 };
                 return Ok(ResponseFactory.WithSuccess(response));
             }
