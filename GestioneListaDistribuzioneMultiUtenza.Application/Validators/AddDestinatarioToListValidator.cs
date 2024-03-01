@@ -4,11 +4,11 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
 {
-    public class AddDestinatarioToListValidator : AbstractValidator<AddDestinatarioToListRequest>
+    public class AddDestinatarioToListValidator : AbstractValidator<AddListaDistribuzione_DestinatarioRequest>
     {
         public AddDestinatarioToListValidator() 
         {
-            RuleFor(l => l.listId)
+            RuleFor(r => r.idLista)
                 .NotNull()
                 .WithMessage("Il campo id lista è obbligatorio (nullo)")
                 .NotEmpty()
