@@ -4,7 +4,7 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
 {
-    public class GetListaDistribuzioneByEmailValidator : AbstractValidator<GetListaFromEmailRequest>
+    public class GetListaDistribuzioneByEmailValidator : AbstractValidator<GetListeUtenteByEmailRequest>
     {
         public GetListaDistribuzioneByEmailValidator()
         {

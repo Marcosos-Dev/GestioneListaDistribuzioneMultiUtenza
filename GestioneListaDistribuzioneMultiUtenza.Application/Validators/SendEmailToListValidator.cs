@@ -3,7 +3,7 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
 {
-    public class SendEmailToListValidator : AbstractValidator<SendEmailToListRequest>
+    public class SendEmailToListValidator : AbstractValidator<SendEmailToListaRequest>
     {
         public SendEmailToListValidator()
         {

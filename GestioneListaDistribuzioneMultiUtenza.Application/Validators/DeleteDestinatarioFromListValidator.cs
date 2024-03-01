@@ -3,7 +3,7 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
 {
-    public class DeleteDestinatarioFromListValidator : AbstractValidator<DeleteListaDistribuzione_EmailRequest>
+    public class DeleteDestinatarioFromListValidator : AbstractValidator<DeleteListaDistribuzione_DestinatarioRequest>
     {
         public DeleteDestinatarioFromListValidator() 
         {
