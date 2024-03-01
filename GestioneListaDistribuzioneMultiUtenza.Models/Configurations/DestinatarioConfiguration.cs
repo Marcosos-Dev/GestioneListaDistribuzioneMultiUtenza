@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Configurations
 {
-    public class EmailDestinatariaConfiguration : IEntityTypeConfiguration<EmailDestinatario>
+    public class DestinatarioConfiguration : IEntityTypeConfiguration<Destinatario>
     {
-        public void Configure(EntityTypeBuilder<EmailDestinatario> builder)
+        public void Configure(EntityTypeBuilder<Destinatario> builder)
         {
-            builder.ToTable("EmailDestinatari");
-            builder.HasKey(k => k.IdEmailDestinatario);
+            builder.ToTable("Destinatari");
+            builder.HasKey(k => k.IdDestinatario);
         }
     }
 }

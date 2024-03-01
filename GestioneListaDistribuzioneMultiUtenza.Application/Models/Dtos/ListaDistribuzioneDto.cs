@@ -5,10 +5,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Models.Dtos
     public class ListaDistribuzioneDto
     {
         public ListaDistribuzioneDto() { }
-        public ListaDistribuzioneDto(ListaDistribuzione list)
+        public ListaDistribuzioneDto(ListaDistribuzione listaDistribuzione)
         {
-            IdProprietario = list.IdProprietario;
-            NomeLista = list.NomeLista;
+            IdProprietario = listaDistribuzione.IdProprietario;
+            NomeLista = listaDistribuzione.NomeLista;
         }
 
         public int IdProprietario { get; set; }

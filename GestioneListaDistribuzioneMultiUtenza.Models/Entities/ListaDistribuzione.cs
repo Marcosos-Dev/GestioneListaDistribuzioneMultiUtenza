@@ -12,7 +12,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Entities
         public int IdProprietario { get; set; }
         public string NomeLista { get; set; }
 
-        public ICollection<ListaDistribuzione_Email> EmailDestinatarie { get; set; } = null!;
+        public ICollection<ListaDistribuzione_Destinatario> Destinatari { get; set; } = null!;
         public Utente UtenteProprietario { get; set; }
 
 

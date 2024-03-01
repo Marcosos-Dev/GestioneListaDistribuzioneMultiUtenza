@@ -1,6 +1,6 @@
 ﻿namespace GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests
 {
-    public class GetListaFromEmailRequest
+    public class GetListeUtenteByEmailRequest
     {
         public int PageSize { get; set; }
         public int PageNumber { get; set; }

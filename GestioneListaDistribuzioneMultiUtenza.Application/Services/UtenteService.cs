@@ -13,9 +13,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             _utenteRepository = utenteRepository;
         }
 
-        public async Task AddUtenteAsync(Utente utente)
+        public async Task CreateUtenteAsync(Utente utente)
         {
-            await _utenteRepository.AggiungiAsync(utente);
+            await _utenteRepository.AddAsync(utente);
             await _utenteRepository.SaveAsync();
         }
 
@@ -24,9 +24,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             return await _utenteRepository.GetUtenteByEmailPasswordAsync(email,password);
         }
 
-        public async Task<Utente> GetUtenteByIdAsync(object id)
+        public async Task<Utente> GetAsync(object id)
         {
-            return await _utenteRepository.OttieniAsync(id);
+            return await _utenteRepository.GetAsync(id);
         }
 
         public async Task<Utente> GetUtenteByEmailAsync(string email)

@@ -22,18 +22,18 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Context
 
         public DbSet<Utente> Utenti { get; set; }
         public DbSet<ListaDistribuzione> ListeDistribuzione { get; set; }
-        public DbSet<ListaDistribuzione_Email> UnioneListe_Destinatari { get; set; }
-        public DbSet<EmailDestinatario> EmailDestinatarie{ get; set; }
+        public DbSet<ListaDistribuzione_Destinatario> Liste_Destinatari { get; set; }
+        public DbSet<Destinatario> Destinatari{ get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            /*if (!optionsBuilder.IsConfigured)
+            if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
                .UseSqlServer("data source=localhost;Initial catalog=DistribuzioneMultiUtenza;User Id=paradigmi;Password=paradigmi;TrustServerCertificate=True;Trusted_Connection=true");
 
-            }*/
-        }
+            }
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

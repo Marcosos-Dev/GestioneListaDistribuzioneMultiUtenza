@@ -17,9 +17,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
             
         }
 
-        public async Task<(List<ListaDistribuzione>, int)> GetListeOfUtenteAsync(int IdUtente, int? from, int? num)
+        public async Task<(List<ListaDistribuzione>, int)> GetListeUtenteAsync(int idUtente, int? from, int? num)
         {
-            var liste = _ctx.ListeDistribuzione.Where(l => l.IdProprietario.Equals(IdUtente)).AsQueryable();
+            var liste = _ctx.ListeDistribuzione.Where(l => l.IdProprietario.Equals(idUtente)).AsQueryable();
             int totalNum = liste.Count();
             if (from != null && num != null)
             {

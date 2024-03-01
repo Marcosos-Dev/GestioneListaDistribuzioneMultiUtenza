@@ -17,7 +17,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         }
 
         [HttpPost]
-        [Route("new")]
+        [Route("createUtente")]
         public async Task<IActionResult> CreateUtenteAsync(CreateUtenteRequest request)
         {
             if(await _utenteService.GetUtenteByEmailAsync(request.Email) != null) 
@@ -25,7 +25,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
                 return BadRequest(ResponseFactory.WithError("L'utente già esiste"));
             }
             var utente = request.toEntity();
-            await _utenteService.AddUtenteAsync(utente);
+            await _utenteService.CreateUtenteAsync(utente);
             //response
             var response = new CreateUtenteResponse();
             response.Utente = new Application.Models.Dtos.UtenteDto(utente);
