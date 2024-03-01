@@ -6,32 +6,30 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly EmailDestinatarioRepository _emailRepository;
+        private readonly DestinatarioRepository _destinatarioRepository;
 
-        public EmailService(
-            EmailDestinatarioRepository emailRepository
-            )
+        public EmailService(DestinatarioRepository destinatarioRepository)
         {
-            _emailRepository = emailRepository;
+            _destinatarioRepository = destinatarioRepository;
         }
 
-        public async Task AggiungiEmailAsync(string email)
+        public async Task AddDestinatarioAsync(string email)
         {
-            await _emailRepository.AggiungiAsync(new EmailDestinatario
+            await _destinatarioRepository.AddAsync(new Destinatario
             {
                 Email = email
             });
-            await _emailRepository.SaveAsync();
+            await _destinatarioRepository.SaveAsync();
         }
 
-        public async Task<int> OttieniIdEmail(string email)
+        public async Task<int> GetIdDestinatarioAsync(string email)
         {
-            return await _emailRepository.OttieniIdFromEmail(email);
+            return await _destinatarioRepository.GetIdDestinatarioAsync(email);
         }
 
-        public async Task<List<EmailDestinatario>> OttieniEmailFromId(List<int> listId)
+        public async Task<List<Destinatario>> GetDestinatariAsync(List<int> idLista)
         {
-            return await _emailRepository.OttieniEmailFromId(listId);
+            return await _destinatarioRepository.GetDestinatariAsync(idLista);
         }
     }
 }

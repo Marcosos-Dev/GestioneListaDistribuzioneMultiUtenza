@@ -10,25 +10,25 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 {
-    public class EmailDestinatarioRepository : GenericRepository<EmailDestinatario>
+    public class DestinatarioRepository : GenericRepository<Destinatario>
     {
-        public EmailDestinatarioRepository(MyDbContext ctx) : base(ctx)
+        public DestinatarioRepository(MyDbContext ctx) : base(ctx)
         {
 
         }
 
-        public async Task<int> OttieniIdFromEmail(string email)
+        public async Task<int> GetIdDestinatarioAsync(string email)
         {
-            return await _ctx.EmailDestinatarie.
+            return await _ctx.Destinatari.
                 Where(x => x.Email.ToLower().Equals(email.ToLower())).
-                Select(X => X.IdEmailDestinatario).
+                Select(X => X.IdDestinatario).
                 FirstOrDefaultAsync();
         }
 
-        public async Task<List<EmailDestinatario>> OttieniEmailFromId(List<int> items)
+        public async Task<List<Destinatario>> GetDestinatariAsync(List<int> ids)
         {
-            return await _ctx.EmailDestinatarie.
-                Where(x => items.Contains(x.IdEmailDestinatario)).
+            return await _ctx.Destinatari.
+                Where(x => ids.Contains(x.IdDestinatario)).
                 ToListAsync();
         }
     }

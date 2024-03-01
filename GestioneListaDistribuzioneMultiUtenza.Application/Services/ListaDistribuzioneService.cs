@@ -15,15 +15,15 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             _listaDistribuzioneRepository = listaDistribuzioneRepository;
         }
 
-        public async Task AggiungiListaAsync(ListaDistribuzione lista)
+        public async Task AddListaDistribuzioneAsync(ListaDistribuzione lista)
         {
-            await _listaDistribuzioneRepository.AggiungiAsync(lista);
+            await _listaDistribuzioneRepository.AddAsync(lista);
             await _listaDistribuzioneRepository.SaveAsync();
         }
 
-        public async Task<int> OttieniProprietarioListaAsync(int IdLista)
+        public async Task<int> GetProprietarioListaAsync(int idLista)
         {
-            var lista = await _listaDistribuzioneRepository.OttieniAsync(IdLista);
+            var lista = await _listaDistribuzioneRepository.GetAsync(idLista);
             if (lista != null)
             {
                 return lista.IdProprietario;
@@ -31,9 +31,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             return default;
         }
 
-        public async Task<(List<ListaDistribuzione>, int)> GetListeOfUtenteAsync(int IdUtente, int? from, int? num)
+        public async Task<(List<ListaDistribuzione>, int)> GetListeUtenteAsync(int idUtente, int? from, int? num)
         {
-            return await _listaDistribuzioneRepository.GetListeOfUtenteAsync(IdUtente, from, num);
+            return await _listaDistribuzioneRepository.GetListeUtenteAsync(idUtente, from, num);
         }
     }
 }

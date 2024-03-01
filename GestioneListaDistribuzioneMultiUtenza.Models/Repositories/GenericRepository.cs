@@ -16,38 +16,26 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
             _ctx = ctx;
         }
 
-        public void Aggiungi(T entity)
-        {
-            _ctx.Set<T>().Add(entity);
-        }
-        public async Task AggiungiAsync(T entity)
+        public async Task AddAsync(T entity)
         {
             await _ctx.Set<T>().AddAsync(entity);
         }
 
-        public T Ottieni(object id)
-        {
-            return _ctx.Set<T>().Find(id);
-        }
 
-        public async Task<T> OttieniAsync(object id)
+        public async Task<T> GetAsync(object id)
         {
             return await _ctx.Set<T>().FindAsync(id);
         }
 
-        public void Elimina(object id)
+        public async Task DeleteAsync(object id)
         {
-            var entity = Ottieni(id);
+            var entity = await GetAsync(id);
             if(entity != null)
             {
                 _ctx.Set<T>().Remove(entity);
-            }    
+            }
         }
 
-        public void Save()
-        {
-            _ctx.SaveChanges();
-        }
         public async Task SaveAsync()
         {
             await _ctx.SaveChangesAsync();

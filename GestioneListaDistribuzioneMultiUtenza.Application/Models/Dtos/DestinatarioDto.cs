@@ -2,13 +2,13 @@
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Models.Dtos
 {
-    public class EmailDestinatariDto
+    public class DestinatarioDto
     {
-        public EmailDestinatariDto() { }
+        public DestinatarioDto() { }
 
-        public EmailDestinatariDto(EmailDestinatario emailDestinatario) 
+        public DestinatarioDto(Destinatario destinatario) 
         {
-            Email = emailDestinatario.Email;
+            Email = destinatario.Email;
         }
         public string Email { get; set; } = string.Empty;
     }

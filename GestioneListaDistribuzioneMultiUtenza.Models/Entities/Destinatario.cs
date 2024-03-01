@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Entities
 {
-    public class EmailDestinatario
+    public class Destinatario
     {
-        public int IdEmailDestinatario { get; set; }
+        public int IdDestinatario { get; set; }
         public string Email {  get; set; }
 
-        public ICollection<ListaDistribuzione_Email> ListeDiAppartenenze { get; set; } = null!;
+        public ICollection<ListaDistribuzione_Destinatario> ListeDiAppartenenza { get; set; } = null!;
     }
 }

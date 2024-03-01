@@ -21,16 +21,16 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         }
 
         [HttpPost]
-        [Route("addNewList")]
-        public async Task<IActionResult> AggiungiListaAsync(CreateListaDistribuzioneRequest request)
+        [Route("createListaDistribuzione")]
+        public async Task<IActionResult> CreateListaDistribuzioneAsync(CreateListaDistribuzioneRequest request)
         {
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             var lista = request.ToEntity();
             lista.IdProprietario = IdUtente;
-            await _listaDistribuzioneService.AggiungiListaAsync(lista);
+            await _listaDistribuzioneService.AddListaDistribuzioneAsync(lista);
 
             var response = new CreateListaDistribuzioneResponse();
-            response.lista = new Application.Models.Dtos.ListaDistribuzioneDto(lista);
+            response.ListaDistribuzione = new Application.Models.Dtos.ListaDistribuzioneDto(lista);
             return Ok(ResponseFactory
           .WithSuccess(response)
           );

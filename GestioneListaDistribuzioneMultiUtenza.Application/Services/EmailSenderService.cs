@@ -20,16 +20,16 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
         //nome mail = per ora INFO di default
         //subject = oggetto della mail
         //body = contenuto
-        public async Task<List<EmailDestinatario>> SendEmailAsync(string subject, string body, List<EmailDestinatario> email)
+        public async Task<List<Destinatario>> SendEmailAsync(string subject, string body, List<Destinatario> destinatari)
         {
             List<Recipient> recipients = new List<Recipient>();
-            foreach (var Email in email) 
+            foreach (var email in destinatari) 
             {
                 recipients.Add(new Recipient()
                 {
                     EmailAddress = new EmailAddress()
                     {
-                        Address = Email.Email
+                        Address = email.Email
                     }
                 });
             }
@@ -60,7 +60,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
                 .SendMail.PostAsync(postRequestBody);*/
 
             //Ritorno la lista di mail a cui ho inviato la mail
-            return email;
+            return destinatari;
         }
     }
 }
