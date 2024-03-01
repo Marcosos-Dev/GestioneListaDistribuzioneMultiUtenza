@@ -97,11 +97,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             if (IdUtente.Equals(IdProprietario))
             {
-                var emailSent = await _listaDistribuzione_EmailService.SendEmailToListAsync(request.Subject, request.Body, request.listId);
+                var emailSent = await _listaDistribuzione_DestinatarioService.SendEmailToListaDistribuzioneAsync(request.Subject, request.Body, request.idLista);
                 var response = new SendEmailToListResponse
                 {
-                    EmailDestinatariDto = emailSent.Select(s =>
-                new Application.Models.Dtos.EmailDestinatariDto(s)).ToList()
+                    DestinatariDto = emailSent.Select(s =>
+                new Application.Models.Dtos.DestinatarioDto(s)).ToList()
                 };
                 return Ok(ResponseFactory.WithSuccess(response));
             }
