@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "http": {
+    "GestioneListaDistribuzioneMultiUtenza.Web - Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

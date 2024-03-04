@@ -10,11 +10,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
     [ApiController]
     [Route("api/v1/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class ListaDistribuzione_EmailController : ControllerBase
+    public class ListeDistribuzione_DestinatariController : ControllerBase
     {
         private readonly IListaDistribuzione_DestinatarioService _listaDistribuzione_DestinatarioService;
         private readonly IListaDistribuzioneService _listaDistribuzioneService;
-        public ListaDistribuzione_EmailController(IListaDistribuzione_DestinatarioService listaDistribuzione_DestinatarioService, 
+        public ListeDistribuzione_DestinatariController(IListaDistribuzione_DestinatarioService listaDistribuzione_DestinatarioService, 
             IListaDistribuzioneService listaDistribuzioneService)
         {
             _listaDistribuzione_DestinatarioService = listaDistribuzione_DestinatarioService;
@@ -25,12 +25,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("addDestinatario")]
         public async Task<IActionResult> AddListaDistribuzione_DestinatarioAsync(AddListaDistribuzione_DestinatarioRequest request)
         {
-            var IdProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.idLista);
-            int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
-            if (IdUtente.Equals(IdProprietario))
+            var idProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.IdLista);
+            int idUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+            if (idUtente.Equals(idProprietario))
             {
-                var risultatoAggiunta = await _listaDistribuzione_DestinatarioService.AddListaDistribuzione_DestinatarioAsync(request.idLista,request.email);
-                if (risultatoAggiunta == null)
+                var addedListaDistribuzione_Destinatario = await _listaDistribuzione_DestinatarioService
+                    .AddListaDistribuzione_DestinatarioAsync(request.IdLista,request.Email);
+                if (addedListaDistribuzione_Destinatario == null)
                 {
                     return BadRequest(ResponseFactory.WithError("Tentativo di aggiunta di un destinatario ad una lista in cui è già presente"));
                 }
@@ -46,13 +47,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("deleteDestinatario")]
         public async Task<IActionResult> DeleteListaDistribuzione_DestinatarioAsync(DeleteListaDistribuzione_DestinatarioRequest request)
         {
-            var IdProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.idLista);
+            var IdProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.IdLista);
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             if (IdUtente.Equals(IdProprietario))
             {
-                var listaDistribuzione_DestinatarioDeleted = await _listaDistribuzione_DestinatarioService.
-                    DeleteListaDistribuzione_DestinatarioAsync(request.idLista, request.email);
-                if(listaDistribuzione_DestinatarioDeleted == null)
+                var deletedListaDistribuzione_Destinatario = await _listaDistribuzione_DestinatarioService
+                    .DeleteListaDistribuzione_DestinatarioAsync(request.IdLista, request.Email);
+                if(deletedListaDistribuzione_Destinatario == null)
                 {
                     return BadRequest(ResponseFactory.WithError("I parametri forniti non hanno fornito nessun risultato"));
                 }

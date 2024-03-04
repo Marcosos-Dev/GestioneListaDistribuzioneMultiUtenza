@@ -13,19 +13,20 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         public async Task<(List<ListaDistribuzione>, int)> GetListeUtenteByEmailAsync(int idUtente, string email, int from, int num)
         {
-            var query = _ctx.ListeDistribuzione.
-                Where(l => l.IdProprietario == idUtente).
-                    Include(l => l.Destinatari).
-                        ThenInclude(d => d.Destinatario).AsQueryable();
+            var listeUtente = _ctx.ListeDistribuzione
+                .Where(l => l.IdProprietario == idUtente)
+                .AsQueryable();
 
             if (!string.IsNullOrEmpty(email))
             {
-                query = query.Where(l => l.Destinatari.Any(d => d.Destinatario.Email.ToLower().Contains(email.ToLower())));
+                listeUtente = listeUtente.Include(l => l.Destinatari)
+                        .ThenInclude(d => d.Destinatario)
+                        .Where(l => l.Destinatari.Any(d => d.Destinatario.Email.ToLower().Contains(email.ToLower())));
             }
 
-            var totalNum = query.Count();
+            var totalNum = listeUtente.Count();
 
-            return (await query
+            return (await listeUtente
                 .OrderBy(l => l.NomeLista)
                 .Skip(from)
                 .Take(num)

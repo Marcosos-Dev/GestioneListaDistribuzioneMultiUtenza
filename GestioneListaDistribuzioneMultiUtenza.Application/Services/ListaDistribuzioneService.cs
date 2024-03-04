@@ -8,9 +8,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
     {
         private readonly ListaDistribuzioneRepository _listaDistribuzioneRepository;
 
-        public ListaDistribuzioneService(
-            ListaDistribuzioneRepository listaDistribuzioneRepository
-            )
+        public ListaDistribuzioneService(ListaDistribuzioneRepository listaDistribuzioneRepository)
         {
             _listaDistribuzioneRepository = listaDistribuzioneRepository;
         }

@@ -13,18 +13,19 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         public async Task<Utente> GetUtenteByEmailPasswordAsync(string email, string password)
         {
-            var utente = await this.GetUtenteByEmailAsync(email);
+            var utente = await GetUtenteByEmailAsync(email);
             if(utente != null && utente.Password.Equals(password))
             {
                 return utente;
             }
-            return null;
+            return default;
         }
 
         public async Task<Utente> GetUtenteByEmailAsync(string email)
         {
-            return await _ctx.Utenti.
-                Where(u => u.Email.ToLower().Equals(email.ToLower())).FirstOrDefaultAsync();
+            return await _ctx.Utenti
+                .Where(u => u.Email.ToLower().Equals(email.ToLower()))
+                .FirstOrDefaultAsync();
         }
 
     }

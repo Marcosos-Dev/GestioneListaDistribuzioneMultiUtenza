@@ -15,6 +15,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         {
             _tokenService = tokenService;
         }
+
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> CreateTokenAsync(CreateTokenRequest request)

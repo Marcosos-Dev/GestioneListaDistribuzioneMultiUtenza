@@ -24,9 +24,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             {
                 return BadRequest(ResponseFactory.WithError("L'utente già esiste"));
             }
+
             var utente = request.toEntity();
             await _utenteService.CreateUtenteAsync(utente);
-            //response
+
             var response = new CreateUtenteResponse();
             response.Utente = new Application.Models.Dtos.UtenteDto(utente);
 

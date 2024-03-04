@@ -2,7 +2,7 @@
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Extensions
 {
-    public static class MiddlewareExtensions
+    public static class MiddlewareExtension
     {
         public static WebApplication? AddWebMiddleware(this WebApplication? app)
         {

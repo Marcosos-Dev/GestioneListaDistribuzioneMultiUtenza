@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Models.Extensions
 {
-    public static class ServiceExtensions
+    public static class ServiceExtension
     {
         public static IServiceCollection AddModelServices(this IServiceCollection services, IConfiguration configuration)
         {

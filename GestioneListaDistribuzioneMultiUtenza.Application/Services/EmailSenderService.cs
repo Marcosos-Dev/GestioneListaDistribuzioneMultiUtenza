@@ -23,21 +23,21 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
         {
             var destinatari = await _destinatarioService.GetDestinatariAsync(idLista);
             List<Recipient> recipients = new List<Recipient>();
-            foreach (var email in destinatari) 
+            foreach (var dest in destinatari) 
             {
                 recipients.Add(new Recipient()
                 {
                     EmailAddress = new EmailAddress()
                     {
-                        Address = email.Email
+                        Address = dest.Email
                     }
                 });
             }
 
             var clientCredential = new ClientSecretCredential(_emailOption.TenantId
                 , _emailOption.ClientId
-                , _emailOption.ClientSecret
-                );
+                , _emailOption.ClientSecret);
+
             var client = new GraphServiceClient(clientCredential);
 
             Message message = new()
@@ -58,7 +58,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             await client.Users[_emailOption.From]
                 .SendMail.PostAsync(postRequestBody);
 
-            //Ritorno la lista di mail a cui ho inviato la mail
             return destinatari;
         }
     }

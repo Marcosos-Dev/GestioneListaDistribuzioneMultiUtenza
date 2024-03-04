@@ -25,7 +25,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             {
                 List<Claim> claims=new List<Claim>();
                 claims.Add(new Claim("IdUtente", $"{utente.IdUtente}"));
-                claims.Add(new Claim("Email", utente.Email));
 
                 var securityKey = new SymmetricSecurityKey(
                Encoding.UTF8.GetBytes(_jwtAuthOption.Key)

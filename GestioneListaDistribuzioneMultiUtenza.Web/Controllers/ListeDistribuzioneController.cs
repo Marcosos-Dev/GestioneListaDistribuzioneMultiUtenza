@@ -11,11 +11,12 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
     [ApiController]
     [Route("api/v1/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class ListaDistribuzioneController : ControllerBase
+    public class ListeDistribuzioneController : ControllerBase
     {
         private readonly IListaDistribuzioneService _listaDistribuzioneService;
         private readonly IEmailSenderService _emailSenderService;
-        public ListaDistribuzioneController(IListaDistribuzioneService listaDistribuzioneService, IEmailSenderService emailSenderService)
+        public ListeDistribuzioneController(IListaDistribuzioneService listaDistribuzioneService, 
+            IEmailSenderService emailSenderService)
         {
             _listaDistribuzioneService = listaDistribuzioneService;
             _emailSenderService = emailSenderService;
@@ -25,9 +26,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("createListaDistribuzione")]
         public async Task<IActionResult> CreateListaDistribuzioneAsync(CreateListaDistribuzioneRequest request)
         {
-            int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+            int idUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             var lista = request.ToEntity();
-            lista.IdProprietario = IdUtente;
+            lista.IdProprietario = idUtente;
             await _listaDistribuzioneService.AddListaDistribuzioneAsync(lista);
 
             var response = new CreateListaDistribuzioneResponse();
@@ -43,7 +44,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         {
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
             var (listeDistribuzione, totalNum) = await _listaDistribuzioneService.GetListeUtenteByEmailAsync(IdUtente,
-                request.email, request.PageNumber * request.PageSize, request.PageSize);
+                request.Email, request.PageNumber * request.PageSize, request.PageSize);
 
             if (listeDistribuzione.Count == 0)
             {
@@ -67,15 +68,15 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         [Route("sendEmail")]
         public async Task<IActionResult> SendEmailToListaAsync(SendEmailToListaRequest request)
         {
-            var IdProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.idLista);
-            int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
-            if (IdUtente.Equals(IdProprietario))
+            var idProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.IdLista);
+            int idUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+            if (idUtente.Equals(idProprietario))
             {
-                var emailSent = await _emailSenderService.SendEmailAsync(request.Subject, request.Body, request.idLista);
-                var response = new SendEmailToListResponse
+                var emailSent = await _emailSenderService.SendEmailAsync(request.Subject, request.Body, request.IdLista);
+                var response = new SendEmailToListaResponse
                 {
-                    DestinatariDto = emailSent.Select(s =>
-                new Application.Models.Dtos.DestinatarioDto(s)).ToList()
+                    Destinatari = emailSent.Select(s =>
+                    new Application.Models.Dtos.DestinatarioDto(s)).ToList()
                 };
                 return Ok(ResponseFactory.WithSuccess(response));
             }

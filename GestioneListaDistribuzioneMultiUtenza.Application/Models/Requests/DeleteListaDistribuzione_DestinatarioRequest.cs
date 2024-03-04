@@ -2,8 +2,8 @@
 {
     public class DeleteListaDistribuzione_DestinatarioRequest
     {
-        public int idLista { get; set; }
-        public string email { get; set; } = string.Empty;
+        public int IdLista { get; set; }
+        public string Email { get; set; } = string.Empty;
 
     }
 }

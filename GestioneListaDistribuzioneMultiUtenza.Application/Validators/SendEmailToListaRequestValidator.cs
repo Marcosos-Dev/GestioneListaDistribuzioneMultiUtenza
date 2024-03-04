@@ -19,7 +19,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
                 .NotEmpty()
                 .WithMessage("Il campo page number è obbligatorio (vuoto)");
 
-            RuleFor(r => r.idLista)
+            RuleFor(r => r.IdLista)
                 .NotNull()
                 .WithMessage("Il campo id lista è obbligatorio (nullo)")
                 .NotEmpty()

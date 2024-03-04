@@ -13,17 +13,18 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         public async Task<int> GetIdDestinatarioAsync(string email)
         {
-            return await _ctx.Destinatari.
-                Where(x => x.Email.ToLower().Equals(email.ToLower())).
-                Select(X => X.IdDestinatario).
-                FirstOrDefaultAsync();
+            return await _ctx.Destinatari
+                .Where(d => d.Email.ToLower().Equals(email.ToLower()))
+                .Select(d => d.IdDestinatario)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<List<Destinatario>> GetDestinatariAsync(int idLista)
         {
-            return await _ctx.Destinatari.
-                Include(d => d.ListeDiAppartenenza)
-                .Where(d => d.ListeDiAppartenenza.Any(l=>l.IdLista==idLista)).ToListAsync();
+            return await _ctx.Destinatari
+                .Include(d => d.ListeDiAppartenenza)
+                .Where(d => d.ListeDiAppartenenza.Any(l=>l.IdLista==idLista))
+                .ToListAsync();
         }
     }
 }

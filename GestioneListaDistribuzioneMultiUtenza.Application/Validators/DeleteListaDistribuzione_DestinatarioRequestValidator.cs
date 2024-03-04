@@ -7,13 +7,13 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
     {
         public DeleteListaDistribuzione_DestinatarioRequestValidator() 
         {
-            RuleFor(r => r.idLista)
+            RuleFor(r => r.IdLista)
                 .NotNull()
                 .WithMessage("Il campo id lista è obbligatorio (nullo)")
                 .NotEmpty()
                 .WithMessage("Il campo id lista è obbligatorio (vuoto)");
 
-            RuleFor(r => r.email)
+            RuleFor(r => r.Email)
                 .NotNull()
                 .WithMessage("Il campo email è obbligatorio (nullo)")
                 .NotEmpty()

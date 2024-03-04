@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Extensions
 {
-    public static class ServiceExtensions
+    public static class ServiceExtension
     {
         public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
         {

@@ -2,8 +2,8 @@
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses
 {
-    public class SendEmailToListResponse
+    public class SendEmailToListaResponse
     {
-        public List<DestinatarioDto> DestinatariDto = new List<DestinatarioDto>();
+        public List<DestinatarioDto> Destinatari = new List<DestinatarioDto>();
     }
 }
