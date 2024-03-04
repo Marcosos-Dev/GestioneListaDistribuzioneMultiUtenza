@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneListaDistribuzioneM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneListaDistribuzioneMultiUtenza.Models", "GestioneListaDistribuzioneMultiUtenza.Models\GestioneListaDistribuzioneMultiUtenza.Models.csproj", "{F4BDA408-192D-4BF2-9AAA-32691426C4FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestioneListaDistribuzioneMultiUtenza.Application", "GestioneListaDistribuzioneMultiUtenza.Application\GestioneListaDistribuzioneMultiUtenza.Application.csproj", "{9C44DF8D-BFD1-4DE7-A33B-8C7A14AAA86B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneListaDistribuzioneMultiUtenza.Application", "GestioneListaDistribuzioneMultiUtenza.Application\GestioneListaDistribuzioneMultiUtenza.Application.csproj", "{9C44DF8D-BFD1-4DE7-A33B-8C7A14AAA86B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DumpDatabase", "DumpDatabase", "{FC6FB0BE-6F83-476E-AFC9-B338B067069F}"
+	ProjectSection(SolutionItems) = preProject
+		dump.sql = dump.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
