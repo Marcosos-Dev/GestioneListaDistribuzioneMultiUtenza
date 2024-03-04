@@ -3,12 +3,15 @@ using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
 using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ListaDistribuzione_EmailController : ControllerBase
     {
         private readonly IListaDistribuzione_DestinatarioService _listaDistribuzione_DestinatarioService;
@@ -73,8 +76,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             
             if (listeDiDistribuzione.Count == 0)
             {
-                return BadRequest(ResponseFactory.WithError("L'email fornita non esiste o non è associata a nessuna lista" +
-                    "o l'utente non possiede alcuna lista"));
+                return BadRequest(ResponseFactory.WithError("L'email fornita non esiste o non è associata a nessuna lista dell'utente" +
+                    " o l'utente non possiede alcuna lista"));
             }
 
             var pageFound = (totalNum / (decimal)request.PageSize);

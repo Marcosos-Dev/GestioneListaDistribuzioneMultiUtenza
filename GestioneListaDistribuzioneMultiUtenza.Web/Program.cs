@@ -1,4 +1,6 @@
 
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
 using GestioneListaDistribuzioneMultiUtenza.Application.Options;
 using GestioneListaDistribuzioneMultiUtenza.Application.Services;
@@ -40,6 +42,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<DestinatarioRepository>();
             builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssembly(
+                        AppDomain.CurrentDomain.GetAssemblies().
+                        SingleOrDefault(assembly => assembly.GetName().Name == "GestioneListaDistribuzioneMultiUtenza.Application"));
 
             builder.Services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo
