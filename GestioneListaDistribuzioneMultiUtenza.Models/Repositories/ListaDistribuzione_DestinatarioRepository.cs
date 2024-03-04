@@ -39,27 +39,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
                 .FirstOrDefault();
             if (listaDistribuzione_destinatarioResult != null)
             {
-                DeleteAsync(listaDistribuzione_destinatarioResult.IdListaDestinatari);
+                await DeleteAsync(listaDistribuzione_destinatarioResult.IdListaDestinatari);
                 await SaveAsync();
             }
             return listaDistribuzione_destinatarioResult;
-        }
-
-
-        public async Task<(List<ListaDistribuzione>, int)> GetListeUtenteByEmailAsync(List<ListaDistribuzione> listeUtente, int idEmail,
-            int from, int num)
-        {
-            List<int> idsListeUtente = listeUtente.Select(l => l.IdLista).ToList();
-
-            var idsListeUtenteByEmail = await _ctx.Liste_Destinatari
-                            .Where(l => idsListeUtente.Contains(l.IdLista) && l.IdDestinatario == idEmail)
-                            .Select(l => l.IdLista)
-                            .ToListAsync();
-
-            var ListeUtenteByEmail = listeUtente.Where(l => idsListeUtenteByEmail.Contains(l.IdLista)).ToList();
-            int totalNum = ListeUtenteByEmail.Count();
-            var PagedListeUtenteByEmail = ListeUtenteByEmail.OrderBy(l => l.NomeLista).Skip((int)from).Take((int)num).ToList();
-            return (PagedListeUtenteByEmail, totalNum);
         }
     }
 }

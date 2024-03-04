@@ -18,11 +18,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
                 .WithMessage("Il campo page number è obbligatorio (nullo)")
                 .GreaterThanOrEqualTo(0)
                 .WithMessage("Il campo page number deve essere almeno 0");
-
+/*
             RuleFor(r => r.email)
                 .Matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
                 .When(r => !string.IsNullOrEmpty(r.email))
-                .WithMessage("email non valida");
+                .WithMessage("email non valida");*/
         }
     }
 }

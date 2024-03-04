@@ -39,7 +39,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web
             builder.Services.AddScoped<ListaDistribuzione_DestinatarioRepository>();
             builder.Services.AddScoped<IListaDistribuzioneService, ListaDistribuzioneService>();
             builder.Services.AddScoped<ListaDistribuzioneRepository>();
-            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<IDestinatarioService, DestinatarioService>();
             builder.Services.AddScoped<DestinatarioRepository>();
             builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
             builder.Services.AddFluentValidationAutoValidation();

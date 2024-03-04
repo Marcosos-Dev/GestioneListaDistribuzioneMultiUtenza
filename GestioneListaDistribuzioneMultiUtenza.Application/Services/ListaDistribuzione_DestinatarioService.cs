@@ -8,18 +8,18 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
     {
         private readonly ListaDistribuzione_DestinatarioRepository _listaDistribuzione_DestinatarioRepository;
         private readonly IEmailSenderService _emailSenderService;
-        private readonly IEmailService _emailService;
+        private readonly IDestinatarioService _destinatarioService;
         private readonly IListaDistribuzioneService _listaDistribuzioneService;
 
         public ListaDistribuzione_DestinatarioService(
             ListaDistribuzione_DestinatarioRepository listaDistribuzione_DestinatarioRepository,
-            IEmailService emailService,
+            IDestinatarioService destinatarioService,
             IListaDistribuzioneService listaDistribuzioneService,
             IEmailSenderService emailSenderService
             )
         {
             _listaDistribuzione_DestinatarioRepository = listaDistribuzione_DestinatarioRepository;
-            _emailService = emailService;
+            _destinatarioService = destinatarioService;
             _listaDistribuzioneService = listaDistribuzioneService;
             _emailSenderService = emailSenderService;
         }
@@ -38,11 +38,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 
         public async Task<ListaDistribuzione_Destinatario> AddListaDistribuzione_DestinatarioAsync(int idLista, string email)
         {
-            int idEmail = await _emailService.GetIdDestinatarioAsync(email);
+            int idEmail = await _destinatarioService.GetIdDestinatarioAsync(email);
             if(idEmail == 0)
             {
-                await _emailService.AddDestinatarioAsync(email);
-                idEmail = await _emailService.GetIdDestinatarioAsync(email);
+                await _destinatarioService.AddDestinatarioAsync(email);
+                idEmail = await _destinatarioService.GetIdDestinatarioAsync(email);
                 return await CreateListaDistribuzione_DestinatarioAsync(idLista, idEmail);
             }
             if (await _listaDistribuzione_DestinatarioRepository.GetListaDistribuzione_DestinatarioAsync(idLista, idEmail) == null)
@@ -55,32 +55,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 
         public async Task<ListaDistribuzione_Destinatario> DeleteListaDistribuzione_DestinatarioAsync(int idLista, string email)
         {
-            var idDestinatario = await _emailService.GetIdDestinatarioAsync(email);
+            var idDestinatario = await _destinatarioService.GetIdDestinatarioAsync(email);
             return await _listaDistribuzione_DestinatarioRepository.DeleteListaDistribuzione_DestinatarioAsync(idLista, idDestinatario);
-        }
-
-        public async Task<(List<ListaDistribuzione>, int)> GetListeUtenteByEmailAsync(int IdUtente,
-            string? email, int from, int num)
-        {
-            if (string.IsNullOrEmpty(email))
-            {
-                return await _listaDistribuzioneService.GetListeUtenteAsync(IdUtente, from, num);
-            }
-            var liste = await _listaDistribuzioneService.GetListeUtenteAsync(IdUtente, null, null);
-            var idEmail = await _emailService.GetIdDestinatarioAsync(email);
-            return await _listaDistribuzione_DestinatarioRepository.GetListeUtenteByEmailAsync(liste.Item1, idEmail, from, num);
-
-        }
-
-        public async Task<List<Destinatario>> SendEmailToListaDistribuzioneAsync(string subject, string body, int idLista)
-        {
-            List<int> idsEmail = await _listaDistribuzione_DestinatarioRepository.GetIdsDestinatariAsync(idLista);
-            List<Destinatario> emails = await _emailService.GetDestinatariAsync(idsEmail);
-            if (emails.Count != 0)
-            {
-                return await _emailSenderService.SendEmailAsync(subject, body, emails);
-            }
-            return new List<Destinatario>();
         }
     }
 }

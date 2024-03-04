@@ -25,11 +25,11 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
                 FirstOrDefaultAsync();
         }
 
-        public async Task<List<Destinatario>> GetDestinatariAsync(List<int> ids)
+        public async Task<List<Destinatario>> GetDestinatariAsync(int idLista)
         {
             return await _ctx.Destinatari.
-                Where(x => ids.Contains(x.IdDestinatario)).
-                ToListAsync();
+                Include(d => d.ListeDiAppartenenza)
+                .Where(d => d.ListeDiAppartenenza.Any(l=>l.IdLista==idLista)).ToListAsync();
         }
     }
 }

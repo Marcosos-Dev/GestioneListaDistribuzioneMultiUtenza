@@ -12,16 +12,19 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
     public class EmailSenderService : IEmailSenderService
     {
         private readonly EmailOption _emailOption;
-        public EmailSenderService(IOptions<EmailOption> emailOptions)
+        private readonly IDestinatarioService _destinatarioService;
+        public EmailSenderService(IOptions<EmailOption> emailOptions, IDestinatarioService destinatarioService)
         {
             _emailOption = emailOptions.Value;
+            _destinatarioService = destinatarioService;
         }
 
         //nome mail = per ora INFO di default
         //subject = oggetto della mail
         //body = contenuto
-        public async Task<List<Destinatario>> SendEmailAsync(string subject, string body, List<Destinatario> destinatari)
+        public async Task<List<Destinatario>> SendEmailAsync(string subject, string body, int idLista)
         {
+            var destinatari = await _destinatarioService.GetDestinatariAsync(idLista);
             List<Recipient> recipients = new List<Recipient>();
             foreach (var email in destinatari) 
             {

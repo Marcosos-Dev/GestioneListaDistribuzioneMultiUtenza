@@ -1,6 +1,7 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
 using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
+using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
@@ -21,7 +22,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
             string token = await _tokenService.CreateTokenAsync(request.Email, request.Password);
             if(token != null)
             {
-                return Ok(token);
+                var response = new CreateTokenResponse { Token = token };
+                return Ok(ResponseFactory.WithSuccess(response));
             }
             return BadRequest(ResponseFactory.WithError("Email e/o Password errate"));
         }
