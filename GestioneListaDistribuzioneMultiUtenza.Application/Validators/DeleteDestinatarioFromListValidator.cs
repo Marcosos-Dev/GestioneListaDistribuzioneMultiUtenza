@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using GestioneListaDistribuzioneMultiUtenza.Application.Extensions;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
@@ -17,8 +16,8 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
                 .NotEmpty()
                 .WithMessage("Il campo email è obbligatorio (nullo)")
                 .NotNull()
-                .WithMessage("Il campo email è obbligatorio (vuoto)")
-                .WithRegEx("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", "email non valida");
+                .WithMessage("Il campo email è obbligatorio (vuoto)");
+                //.WithRegEx("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", "email non valida");
         }
     }
 }
