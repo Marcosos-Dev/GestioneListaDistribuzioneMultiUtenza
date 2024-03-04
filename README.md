@@ -1,5 +1,5 @@
 # Gestione di liste di distribuzione multiutenza
-Realizzazione di una web api che permetta la gestione di una lista di distribuzione multi utenza.
+Realizzazione di una web api che permetta la gestione di una lista di distribuzione multiutenza.
 
 L'applicazione deve avere un elenco di utenti con le seguenti proprietà :
 - Email
@@ -18,11 +18,11 @@ Le api che dovranno essere realizzate sono le seguenti :
  - Autenticazione.
  - Creazione di una lista di distribuzione.
  - Aggiunta di un destinatario ad una lista di distribuzione.
- - Eliminazione di un destinatario ad un lista di distribuzione.
- - Invio di una comunicazione ad una lista di distrizibuzione.
+ - Eliminazione di un destinatario da un lista di distribuzione.
+ - Invio di una comunicazione ad una lista di distribuzione.
    Tramite questa chiamata dovrà partire una email a tutti i membri della lista di distribuzione
  - Dato un destinatario ottenere tutte le liste di distribuzione a lui associate
-   La ricerca dovrà paginare i risultanti, in base ad un parametro passato nella chiamata.	
+   La ricerca dovrà paginare i risultati, in base ad un parametro passato nella chiamata.	
      
 Ogni utente può vedere solamente i dati delle liste di distribuzione di cui è proprietario.
 
