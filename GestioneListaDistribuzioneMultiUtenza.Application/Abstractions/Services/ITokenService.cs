@@ -1,6 +1,4 @@
-﻿using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
-
-namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services
+﻿namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services
 {
     public interface ITokenService
     {

@@ -1,8 +1,6 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
 using GestioneListaDistribuzioneMultiUtenza.Application.Factories;
 using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
-using GestioneListaDistribuzioneMultiUtenza.Application.Models.Responses;
-using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

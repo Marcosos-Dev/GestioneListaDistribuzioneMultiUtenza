@@ -16,7 +16,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Extensions
             services.AddScoped<IUtenteService, UtenteService>();
             services.AddScoped<IListaDistribuzione_DestinatarioService, ListaDistribuzione_DestinatarioService>();
             services.AddScoped<IListaDistribuzioneService, ListaDistribuzioneService>();
-            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IDestinatarioService, DestinatarioService>();
             services.AddScoped<IEmailSenderService, EmailSenderService>();
 
             return services;

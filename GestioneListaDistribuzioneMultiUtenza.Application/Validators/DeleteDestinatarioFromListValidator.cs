@@ -16,8 +16,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Validators
                 .NotEmpty()
                 .WithMessage("Il campo email è obbligatorio (nullo)")
                 .NotNull()
-                .WithMessage("Il campo email è obbligatorio (vuoto)");
-                //.WithRegEx("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", "email non valida");
+                .WithMessage("Il campo email è obbligatorio (vuoto)")
+                .Matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
+                .WithMessage("email non valida");
         }
     }
 }

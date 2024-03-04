@@ -1,5 +1,4 @@
 ﻿using GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services;
-using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
 using GestioneListaDistribuzioneMultiUtenza.Application.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

@@ -1,6 +1,4 @@
-﻿    using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
-
-namespace GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests
+﻿namespace GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests
 {
     public class DeleteListaDistribuzione_DestinatarioRequest
     {

@@ -1,5 +1,4 @@
-﻿using GestioneListaDistribuzioneMultiUtenza.Application.Models.Requests;
-using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
+﻿using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Services
 {
