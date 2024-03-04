@@ -4,6 +4,25 @@ using GestioneListaDistribuzioneMultiUtenza.Models.Entities;
 using GestioneListaDistribuzioneMultiUtenza.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
 
+
+/*MyDbContext ctx = new MyDbContext();
+var emailRepo = new DestinatarioRepository(ctx);
+foreach (var destinatari in await emailRepo.GetDestinatariAsync(2))
+{
+    Console.WriteLine(destinatari.Email);
+}*/
+/*MyDbContext ctx = new MyDbContext();
+var listaRepo = new ListaDistribuzioneRepository(ctx);
+var liste = listaRepo.testmethod(1, "va");
+foreach (var lista in liste)
+{
+    Console.WriteLine(lista.NomeLista);
+    foreach (var lista_destinatario in lista.Destinatari)
+    {
+        Console.WriteLine("   " + lista_destinatario.Destinatario.Email);
+    }
+}
+Console.ReadLine();*/
 /*MyDbContext ctx = new MyDbContext();
 var utenteRepo = new UtenteRepository(ctx);
 var utente1 = new Utente();

@@ -31,5 +31,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
             return await _ctx.Utenti.
                 Where(u => u.Email.ToLower().Equals(email.ToLower())).FirstOrDefaultAsync();
         }
+
     }
 }

@@ -4,11 +4,11 @@ using GestioneListaDistribuzioneMultiUtenza.Models.Repositories;
 
 namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
 {
-    public class EmailService : IEmailService
+    public class DestinatarioService : IDestinatarioService
     {
         private readonly DestinatarioRepository _destinatarioRepository;
 
-        public EmailService(DestinatarioRepository destinatarioRepository)
+        public DestinatarioService(DestinatarioRepository destinatarioRepository)
         {
             _destinatarioRepository = destinatarioRepository;
         }
@@ -27,7 +27,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             return await _destinatarioRepository.GetIdDestinatarioAsync(email);
         }
 
-        public async Task<List<Destinatario>> GetDestinatariAsync(List<int> idLista)
+        public async Task<List<Destinatario>> GetDestinatariAsync(int idLista)
         {
             return await _destinatarioRepository.GetDestinatariAsync(idLista);
         }

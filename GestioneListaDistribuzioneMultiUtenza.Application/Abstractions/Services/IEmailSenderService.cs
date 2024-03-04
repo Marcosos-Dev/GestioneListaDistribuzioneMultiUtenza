@@ -4,6 +4,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
 {
     public interface IEmailSenderService
     {
-        public Task<List<Destinatario>> SendEmailAsync(string subject, string body, List<Destinatario> destinatari);
+        public Task<List<Destinatario>> SendEmailAsync(string subject, string body, int idLista);
     }
 }

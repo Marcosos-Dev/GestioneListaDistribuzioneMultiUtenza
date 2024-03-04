@@ -6,6 +6,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
     {
         Task AddListaDistribuzioneAsync(ListaDistribuzione lista);
         Task<int> GetProprietarioListaAsync(int idLista);
-        Task<(List<ListaDistribuzione>, int)> GetListeUtenteAsync(int idUtente, int? from, int? num);
+        Task<(List<ListaDistribuzione>, int)> GetListeUtenteByEmailAsync(int idUtente, string email, int from, int num);
     }
 }

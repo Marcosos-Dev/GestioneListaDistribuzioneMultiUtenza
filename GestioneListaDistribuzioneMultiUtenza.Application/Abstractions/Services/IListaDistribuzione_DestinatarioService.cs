@@ -7,7 +7,5 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Abstractions.Service
     {
         Task<ListaDistribuzione_Destinatario> AddListaDistribuzione_DestinatarioAsync(int idLista, string email);
         Task<ListaDistribuzione_Destinatario> DeleteListaDistribuzione_DestinatarioAsync(int idLista, string email);
-        Task<(List<ListaDistribuzione>, int)> GetListeUtenteByEmailAsync(int idUtente, string email, int from, int num);
-        Task<List<Destinatario>> SendEmailToListaDistribuzioneAsync(string subject, string body, int idLista);
     }
 }

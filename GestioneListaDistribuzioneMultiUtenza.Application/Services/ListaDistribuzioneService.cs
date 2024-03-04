@@ -31,9 +31,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             return default;
         }
 
-        public async Task<(List<ListaDistribuzione>, int)> GetListeUtenteAsync(int idUtente, int? from, int? num)
+        public async Task<(List<ListaDistribuzione>, int)> GetListeUtenteByEmailAsync(int idUtente, string email, int from, int num)
         {
-            return await _listaDistribuzioneRepository.GetListeUtenteAsync(idUtente, from, num);
+            return await _listaDistribuzioneRepository.GetListeUtenteByEmailAsync(idUtente, email, from, num);
         }
     }
 }
