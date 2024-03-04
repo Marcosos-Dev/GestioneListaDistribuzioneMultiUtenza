@@ -19,9 +19,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             _destinatarioService = destinatarioService;
         }
 
-        //nome mail = per ora INFO di default
-        //subject = oggetto della mail
-        //body = contenuto
         public async Task<List<Destinatario>> SendEmailAsync(string subject, string body, int idLista)
         {
             var destinatari = await _destinatarioService.GetDestinatariAsync(idLista);
@@ -58,7 +55,6 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
             postRequestBody.Message = message;
             postRequestBody.SaveToSentItems = true;
 
-            //TOGLIERE COMMENTO SE SI VUOLE INVIARE LA MAIL
             await client.Users[_emailOption.From]
                 .SendMail.PostAsync(postRequestBody);
 
