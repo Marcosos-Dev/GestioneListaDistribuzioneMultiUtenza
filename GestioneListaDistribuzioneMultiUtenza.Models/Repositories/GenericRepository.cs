@@ -21,13 +21,9 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
             return await _ctx.Set<T>().FindAsync(id);
         }
 
-        public async Task DeleteAsync(object id)
+        public void Delete(T entity)
         {
-            var entity = await GetAsync(id);
-            if(entity != null)
-            {
-                _ctx.Set<T>().Remove(entity);
-            }
+            _ctx.Set<T>().Remove(entity);
         }
 
         public async Task SaveAsync()
