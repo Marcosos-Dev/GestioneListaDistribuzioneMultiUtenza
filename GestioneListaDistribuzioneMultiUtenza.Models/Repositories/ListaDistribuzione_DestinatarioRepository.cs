@@ -20,17 +20,15 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
         public async Task<ListaDistribuzione_Destinatario> DeleteListaDistribuzione_DestinatarioAsync(int idLista, int idDestinatario)
         {
-            var listaDistribuzione_destinatarioResult = _ctx.Liste_Destinatari
-                .Where(ld => ld.IdLista == idLista && ld.IdDestinatario == idDestinatario)
-                .FirstOrDefault();
+            var listaDistribuzione_destinatario = await GetListaDistribuzione_DestinatarioAsync(idLista, idDestinatario);
 
-            if (listaDistribuzione_destinatarioResult != null)
+            if (listaDistribuzione_destinatario != null)
             {
-                await DeleteAsync(listaDistribuzione_destinatarioResult.IdListaDestinatari);
+                await DeleteAsync(listaDistribuzione_destinatario.IdListaDestinatari);
                 await SaveAsync();
             }
 
-            return listaDistribuzione_destinatarioResult;
+            return listaDistribuzione_destinatario;
         }
     }
 }

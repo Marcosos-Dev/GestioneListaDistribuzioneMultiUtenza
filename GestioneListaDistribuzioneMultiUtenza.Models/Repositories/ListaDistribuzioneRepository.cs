@@ -33,5 +33,12 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
                 .ToListAsync(), totalNum);
         }
 
+        public async Task<ListaDistribuzione> GetListaDistribuzioneByNomeAsync(string nomeLista)
+        {
+            return await _ctx.ListeDistribuzione
+                .Where(l => l.NomeLista.ToLower().Equals(nomeLista.ToLower()))
+                .FirstOrDefaultAsync();
+        }
+
     }
 }

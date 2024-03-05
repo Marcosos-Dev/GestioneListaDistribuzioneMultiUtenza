@@ -27,6 +27,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         {
             var idProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.IdLista);
             int idUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+
             if (idUtente.Equals(idProprietario))
             {
                 var addedListaDistribuzione_Destinatario = await _listaDistribuzione_DestinatarioService
@@ -49,6 +50,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         {
             var IdProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.IdLista);
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+
             if (IdUtente.Equals(IdProprietario))
             {
                 var deletedListaDistribuzione_Destinatario = await _listaDistribuzione_DestinatarioService

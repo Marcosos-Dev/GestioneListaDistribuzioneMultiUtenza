@@ -27,15 +27,23 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         public async Task<IActionResult> CreateListaDistribuzioneAsync(CreateListaDistribuzioneRequest request)
         {
             int idUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
-            var lista = request.ToEntity();
-            lista.IdProprietario = idUtente;
-            await _listaDistribuzioneService.AddListaDistribuzioneAsync(lista);
 
-            var response = new CreateListaDistribuzioneResponse();
-            response.ListaDistribuzione = new Application.Models.Dtos.ListaDistribuzioneDto(lista);
-            return Ok(ResponseFactory
-          .WithSuccess(response)
-          );
+            var listaDB = await _listaDistribuzioneService.GetListaDistribuzioneByNomeAsync(request.NomeLista);
+
+            if(idUtente != listaDB.IdProprietario)
+            {
+                var lista = request.ToEntity();
+                lista.IdProprietario = idUtente;
+                await _listaDistribuzioneService.AddListaDistribuzioneAsync(lista);
+
+                var response = new CreateListaDistribuzioneResponse();
+                response.ListaDistribuzione = new Application.Models.Dtos.ListaDistribuzioneDto(lista);
+                return Ok(ResponseFactory
+              .WithSuccess(response)
+              );
+            }
+
+            return BadRequest(ResponseFactory.WithError("Hai già una lista con questo nome"));
         }
 
         [HttpPost]
@@ -43,6 +51,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         public async Task<IActionResult> GetListeUtenteByEmailAsync(GetListeUtenteByEmailRequest request)
         {
             int IdUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+
             var (listeDistribuzione, totalNum) = await _listaDistribuzioneService.GetListeUtenteByEmailAsync(IdUtente,
                 request.Email, request.PageNumber * request.PageSize, request.PageSize);
 
@@ -70,6 +79,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Controllers
         {
             var idProprietario = await _listaDistribuzioneService.GetProprietarioListaAsync(request.IdLista);
             int idUtente = Convert.ToInt32(HttpContext.Items["IdUtente"]);
+
             if (idUtente.Equals(idProprietario))
             {
                 var emailSent = await _emailSenderService.SendEmailAsync(request.Subject, request.Body, request.IdLista);

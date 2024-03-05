@@ -33,5 +33,10 @@ namespace GestioneListaDistribuzioneMultiUtenza.Application.Services
         {
             return await _listaDistribuzioneRepository.GetListeUtenteByEmailAsync(idUtente, email, from, num);
         }
+
+        public async Task<ListaDistribuzione> GetListaDistribuzioneByNomeAsync(string nomeLista)
+        {
+            return await _listaDistribuzioneRepository.GetListaDistribuzioneByNomeAsync(nomeLista);
+        }
     }
 }
