@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneListaDistribuzioneMultiUtenza.Test", "GestioneListaDistribuzioneMultiUtenza.Test\GestioneListaDistribuzioneMultiUtenza.Test.csproj", "{FC92CB5E-EE74-463A-859E-E970EF2F3F7B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneListaDistribuzioneMultiUtenza.Web", "GestioneListaDistribuzioneMultiUtenza.Web\GestioneListaDistribuzioneMultiUtenza.Web.csproj", "{D361DD9D-0DC2-40B6-B9F8-5357FAA47089}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestioneListaDistribuzioneMultiUtenza.Models", "GestioneListaDistribuzioneMultiUtenza.Models\GestioneListaDistribuzioneMultiUtenza.Models.csproj", "{F4BDA408-192D-4BF2-9AAA-32691426C4FF}"
@@ -22,10 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FC92CB5E-EE74-463A-859E-E970EF2F3F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC92CB5E-EE74-463A-859E-E970EF2F3F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC92CB5E-EE74-463A-859E-E970EF2F3F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC92CB5E-EE74-463A-859E-E970EF2F3F7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D361DD9D-0DC2-40B6-B9F8-5357FAA47089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D361DD9D-0DC2-40B6-B9F8-5357FAA47089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D361DD9D-0DC2-40B6-B9F8-5357FAA47089}.Release|Any CPU.ActiveCfg = Release|Any CPU
