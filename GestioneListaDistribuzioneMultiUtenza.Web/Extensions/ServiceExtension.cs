@@ -26,7 +26,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Web.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Lista Distribuzione Multiutente Test",
+                    Title = "Lista Distribuzione Multiutente",
                     Version = "v1"
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
