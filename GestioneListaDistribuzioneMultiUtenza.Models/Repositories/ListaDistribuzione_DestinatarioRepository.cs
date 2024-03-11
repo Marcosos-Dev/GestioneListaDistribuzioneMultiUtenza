@@ -24,7 +24,7 @@ namespace GestioneListaDistribuzioneMultiUtenza.Models.Repositories
 
             if (listaDistribuzione_destinatario != null)
             {
-                await DeleteAsync(listaDistribuzione_destinatario.IdListaDestinatari);
+                Delete(listaDistribuzione_destinatario);
                 await SaveAsync();
             }
 
